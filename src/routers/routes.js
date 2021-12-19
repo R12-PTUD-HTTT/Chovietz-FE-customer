@@ -1,16 +1,16 @@
-import Cart from '../views/Cart/Cart';
-import LoginPage from '../views/Login/LoginPage';
+import Cart from "../views/Cart/Cart";
+import LoginPage from "../views/Login/LoginPage";
 
 const routes = [
   {
-    path: '/login',
+    path: "/login",
     component: () => <LoginPage />,
-    role: ['customer'],
+    role: ["customer"],
   },
   {
-    path: '/cart',
+    path: "/cart",
     component: () => <Cart />,
-    role: ['customer'],
+    role: ["customer"],
   },
 ];
 export default routes;

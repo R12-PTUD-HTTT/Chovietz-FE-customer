@@ -1,7 +1,32 @@
-import './Cart.css';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import "./Cart.css";
+import React from "react";
+import ReactDOM from "react-dom";
+import { Link } from "react-router-dom";
 
+import RowItem from "./RowItem/RowItem";
+
+const productList = [
+  {
+    name: "Lecture",
+    weight: 2,
+    price: 1.2,
+  },
+  {
+    name: "Lecture",
+    weight: 2,
+    price: 1.2,
+  },
+  {
+    name: "Lecture",
+    weight: 2,
+    price: 1.2,
+  },
+  {
+    name: "Lecture",
+    weight: 2,
+    price: 1.2,
+  },
+];
 function Cart(props) {
   return (
     <>
@@ -19,213 +44,19 @@ function Cart(props) {
                         </th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Price</th>
-                        <th scope="col" class="text-right">
-                          {' '}
-                        </th>
+                        <th scope="col" class="text-right"></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="align-items-center">
-                        <td>
-                          <figure class="itemside align-items-center">
-                            <div class="aside">
-                              {' '}
-                              <img
-                                src="img/tr-bs-os/tr/tr-1.png"
-                                class="img-sm"
-                              />{' '}
-                            </div>
-                            <figcaption class="info">
-                              <a href="#" class="title text-dark">
-                                Lettuce
-                              </a>
-                              <p class="text-muted small">2 KG</p>
-                            </figcaption>
-                          </figure>
-                        </td>
-                        <td>
-                          <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                          </select>
-                        </td>
-                        <td>
-                          <div class="price-wrap">
-                            <var class="price">$1156.00</var>
-                          </div>{' '}
-                          {/* price-wrap .// */}
-                        </td>
-                        <td class="text-right">
-                          <a
-                            data-original-title="Save to Wishlist"
-                            title=""
-                            href=""
-                            class="btn wishlist-btn mr-2"
-                            data-toggle="tooltip"
-                          >
-                            {' '}
-                            <i class="fa fa-heart"></i>
-                          </a>
-                          <a href="" class="btn btn-danger btn-remove">
-                            {' '}
-                            Remove
-                          </a>
-                        </td>
-                      </tr>
-
-                      <tr class="align-items-center">
-                        <td>
-                          <figure class="itemside align-items-center">
-                            <div class="aside">
-                              <img
-                                src="img/tr-bs-os/tr/tr-2.png"
-                                class="img-sm"
-                              />
-                            </div>
-                            <figcaption class="info">
-                              <a href="#" class="title text-dark">
-                                Lettuce
-                              </a>
-                              <p class="text-muted small">2 KG</p>
-                            </figcaption>
-                          </figure>
-                        </td>
-                        <td>
-                          <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                          </select>
-                        </td>
-                        <td>
-                          <div class="price-wrap">
-                            <var class="price">$1156.00</var>
-                          </div>{' '}
-                          {/* price-wrap .// */}
-                        </td>
-                        <td class="text-right">
-                          <a
-                            data-original-title="Save to Wishlist"
-                            title=""
-                            href=""
-                            class="btn wishlist-btn mr-2"
-                            data-toggle="tooltip"
-                          >
-                            {' '}
-                            <i class="fa fa-heart"></i>
-                          </a>
-                          <a href="" class="btn btn-danger btn-remove">
-                            {' '}
-                            Remove
-                          </a>
-                        </td>
-                      </tr>
-
-                      <tr class="align-items-center">
-                        <td>
-                          <figure class="itemside align-items-center">
-                            <div class="aside">
-                              <img
-                                src="img/tr-bs-os/tr/tr-3.png"
-                                class="img-sm"
-                              />
-                            </div>
-                            <figcaption class="info">
-                              <a href="#" class="title text-dark">
-                                Lettuce
-                              </a>
-                              <p class="text-muted small">2 KG</p>
-                            </figcaption>
-                          </figure>
-                        </td>
-                        <td>
-                          <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                          </select>
-                        </td>
-                        <td>
-                          <div class="price-wrap">
-                            <var class="price">$1156.00</var>
-                          </div>{' '}
-                          {/* price-wrap .// */}
-                        </td>
-                        <td class="text-right">
-                          <a
-                            data-original-title="Save to Wishlist"
-                            title=""
-                            href=""
-                            class="btn wishlist-btn mr-2"
-                            data-toggle="tooltip"
-                          >
-                            {' '}
-                            <i class="fa fa-heart"></i>
-                          </a>
-                          <a href="" class="btn btn-danger btn-remove">
-                            {' '}
-                            Remove
-                          </a>
-                        </td>
-                      </tr>
-
-                      <tr class="align-items-center">
-                        <td>
-                          <figure class="itemside align-items-center">
-                            <div class="aside">
-                              <img
-                                src="img/tr-bs-os/tr/tr-1.png"
-                                class="img-sm"
-                              />
-                            </div>
-                            <figcaption class="info">
-                              <a href="#" class="title text-dark">
-                                Lettuce
-                              </a>
-                              <p class="text-muted small">2 KG</p>
-                            </figcaption>
-                          </figure>
-                        </td>
-                        <td>
-                          <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                          </select>
-                        </td>
-                        <td>
-                          <div class="price-wrap">
-                            <var class="price">$1156.00</var>
-                          </div>{' '}
-                          {/* price-wrap .// */}
-                        </td>
-                        <td class="text-right">
-                          <a
-                            data-original-title="Save to Wishlist"
-                            title=""
-                            href=""
-                            class="btn wishlist-btn mr-2"
-                            data-toggle="tooltip"
-                          >
-                            {' '}
-                            <i class="fa fa-heart"></i>
-                          </a>
-                          <a href="" class="btn btn-danger btn-remove">
-                            {' '}
-                            Remove
-                          </a>
-                        </td>
-                      </tr>
+                      {productList?.length > 0 &&
+                        productList?.map((product) => (
+                          <RowItem product={product} />
+                        ))}
                     </tbody>
                   </table>
-                </div>{' '}
+                </div>
                 {/* card.// */}
-              </main>{' '}
+              </main>
               {/* col.// */}
               <aside class="col-lg-3">
                 <div class="card coupon-card mb-4">
@@ -246,9 +77,9 @@ function Cart(props) {
                         </div>
                       </div>
                     </form>
-                  </div>{' '}
+                  </div>
                   {/* card-body.// */}
-                </div>{' '}
+                </div>
                 {/* card .// */}
                 <div class="card payment-card">
                   <div class="card-body">
@@ -268,24 +99,24 @@ function Cart(props) {
                     </dl>
                     <hr />
                     <p class="text-center mb-3">
-                      <a href="">
+                      <Link to="">
                         <img src="img/payments.png" height="26" />
-                      </a>
-                      <a href="" class="boxed-btn mb-3 mt-4">
+                      </Link>
+                      <Link to="" class="boxed-btn mb-3 mt-4">
                         Make Purchase
-                      </a>
-                      <a href="" class="boxed-btn btn-outline">
+                      </Link>
+                      <Link to="" class="boxed-btn btn-outline">
                         Make Purchase
-                      </a>
+                      </Link>
                     </p>
-                  </div>{' '}
+                  </div>
                   {/* card-body.// */}
-                </div>{' '}
+                </div>
                 {/* card .// */}
-              </aside>{' '}
+              </aside>
               {/* col.// */}
             </div>
-          </div>{' '}
+          </div>
           {/* container .//  */}
         </section>
       </main>
