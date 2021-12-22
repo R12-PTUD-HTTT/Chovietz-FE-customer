@@ -90,6 +90,11 @@ function HomeNavBar(props) {
                   Contact
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/signup">
+                  Sign Up
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
