@@ -78,6 +78,13 @@ function Header(props) {
               </div>
               <div class="col-lg-4 col-md-4 col-4 text-right">
                 <div class="header-acc-wrap">
+                <div class="header-acc-list header-account">
+                    <Link to="/login">
+                      <span class="">
+                        <img src="img/icon/account_circle.svg" alt="" width="35px" height="35px"/>
+                      </span>
+                    </Link>
+                  </div>
                   <div class="header-acc-list header-wishlist">
                     <Link to="wishlist.html">
                       <span class="">
