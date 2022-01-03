@@ -50,49 +50,44 @@ function HomeNavBar(props) {
                 </div>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="index.html">
-                  Home
+                <Link className="nav-link" to="/">
+                  Trang chủ
                 </Link>
               </li>
               <li className="nav-item dropdown">
                 <Link
                   className="nav-link"
                   data-toggle="dropdown"
-                  to="#"
+                  to="/products"
                   aria-expanded="false"
                 >
-                  Products<i className="fa fa-angle-down"></i>
+                  Sản phẩm<i className="fa fa-angle-down"></i>
                 </Link>
                 <div className="dropdown-menu">
-                  <Link className="dropdown-item" to="category.html">
-                    Category
+                  <Link className="dropdown-item" to="/categories">
+                    Loại hàng
                   </Link>
-                  <Link className="dropdown-item" to="cart.html">
-                    Cart
+                  <Link className="dropdown-item" to="/cart">
+                    Giỏ hàng
                   </Link>
-                  <Link className="dropdown-item" to="checkout.html">
+                  <Link className="dropdown-item" to="/checkout">
                     Checkout
                   </Link>
                 </div>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="blog.html">
-                  Blog
+                <Link className="nav-link" to="/about">
+                  Giới thiệu
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="about.html">
-                  About
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="contact.html">
-                  Contact
+                <Link className="nav-link" to="/contact">
+                  Liên hệ
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/signup">
-                  Sign Up
+                  Đăng kí
                 </Link>
               </li>
             </ul>
