@@ -1,0 +1,64 @@
+.profile-main{
+    padding: 0 1.875rem .625rem;
+    margin-right: 213.250px;
+    background-color: white;
+    margin-top: 30px;    
+    margin-bottom: 30px;   
+}
+.profile-header{
+    border-bottom: .0625rem solid #efefef;
+    padding: 1.125rem 0;
+}
+.header-title{
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    text-transform: capitalize;
+    color: #333;
+}
+.header-content{
+    margin-top: .1875rem;
+    font-size: .875rem;
+    line-height: 1.0625rem;
+    color: #555;
+}
+
+.profile-body{
+    padding-top: 1.875rem;
+    flex-direction: row;
+}
+.profile-body-content{
+    padding-right: 3.125rem;
+}
+
+.body-content{
+    margin-bottom: 1rem;
+    display: -webkit-box;
+}
+.content-name{
+    width: 20%;
+    text-align: right;
+    color: rgba(85,85,85,.8);
+    text-transform: capitalize;
+    overflow: hidden;
+    align-items: center;  
+    display: flex;
+    justify-content: flex-end;
+}
+.content-name label{
+    margin-bottom: 0px;
+}
+.content-value{
+    padding-left: 2rem;
+    display: flex;
+}
+
+.btn-save{
+    padding-left: 20%;
+}
+
+.btn-save button{
+    background-color: #49A010;
+    border-color: #49A010;
+}
