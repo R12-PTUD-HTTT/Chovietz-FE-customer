@@ -12,6 +12,7 @@ import SignUpPage from "./component/SignUp/SignUp";
 import Profile from "./views/ProfileManager/Profile";
 import ChangePass from "./views/ProfileManager/ChangePass";
 import OrderTracking from "./views/OrderTracking/OrderTracking";
+import Checkout from "./views/Checkout/Checkout";
 function Layout(props) {
   return (
     <>
@@ -25,6 +26,7 @@ function Layout(props) {
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/changepass" component={ChangePass} />
         <Route exact path="/order-tracking" component={OrderTracking} />
+        <Route exact path="/checkout" component={Checkout} />
 
 
         {SecureView()}
