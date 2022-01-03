@@ -1,4 +1,5 @@
 import SignUpPage from "../component/SignUp/SignUp";
+import AccountManagement from "../views/Account/AccountManagement";
 import Cart from "../views/Cart/Cart";
 import NotFoundPage from "../views/Error/NotFoundPage";
 import HomePage from "../views/HomePage";
@@ -36,6 +37,12 @@ const routes = [
     path: "/profile",
     component: () => <Profile />,
     requireLogin: false,
+  },
+  {
+    path: "/account/",
+    component: () => <AccountManagement />,
+    requireLogin: false,
+    exact: false,
   },
   {
     path: "/",
