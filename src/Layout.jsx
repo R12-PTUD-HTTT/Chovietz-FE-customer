@@ -11,6 +11,7 @@ import NavBar from "./component/NavBar/NavBar";
 import SignUpPage from "./component/SignUp/SignUp";
 import Profile from "./views/ProfileManager/Profile";
 import ChangePass from "./views/ProfileManager/ChangePass";
+import OrderTracking from "./views/OrderTracking/OrderTracking";
 function Layout(props) {
   return (
     <>
@@ -23,6 +24,7 @@ function Layout(props) {
         <Route exact path="/signup" component={SignUpPage} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/changepass" component={ChangePass} />
+        <Route exact path="/order-tracking" component={OrderTracking} />
 
 
         {SecureView()}
