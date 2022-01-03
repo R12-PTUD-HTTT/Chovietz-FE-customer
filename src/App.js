@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import RouterWrapper from "./routers/RouterWrapper";
+import routes from "./routers/routes";
+import NotFoundPage from "./views/Error/NotFoundPage";
+function renderRoute(routes) {
+  return routes.map((route, index) => {
+    return (
+      <RouterWrapper
+        key={index}
+        path={route.path}
+        component={route.component}
+        requireLogin={route.requireLogin}
+        exact={route.exact === undefined ? true : route.exact}
+      />
+    );
+  });
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        {renderRoute(routes)}
+        <Route path="/" component={NotFoundPage} />
+      </Switch>
+    </Router>
   );
 }
 
