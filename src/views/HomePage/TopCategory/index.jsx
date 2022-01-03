@@ -6,54 +6,54 @@ TopCategory.propTypes = {};
 function TopCategory(props) {
   return (
     <>
-      <section class="top-categories-area pd-tb-100 bg-soft-green">
-        <div class="container">
-          <header class="section-heading text-center">
-            <h3 class="section-title">Top Categories</h3>
+      <section className="top-categories-area pd-tb-100 bg-soft-green">
+        <div className="container">
+          <header className="section-heading text-center">
+            <h3 className="section-title">Top Categories</h3>
           </header>
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="top-categories-carousel owl-carousel">
-                <Link to="" class="single-top-category text-center">
-                  <span class="top-category-image mb-2">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="top-categories-carousel owl-carousel">
+                <Link to="" className="single-top-category text-center">
+                  <span className="top-category-image mb-2">
                     <img src="img/category/cat-fruits.png" alt="" />
                   </span>
-                  <span class="top-category-name">Fruits</span>
+                  <span className="top-category-name">Fruits</span>
                 </Link>
 
-                <Link to="" class="single-top-category text-center">
-                  <span class="top-category-image mb-2">
+                <Link to="" className="single-top-category text-center">
+                  <span className="top-category-image mb-2">
                     <img src="img/category/cat-cakes.png" alt="" />
                   </span>
-                  <span class="top-category-name">Cakes</span>
+                  <span className="top-category-name">Cakes</span>
                 </Link>
 
-                <Link to="" class="single-top-category text-center">
-                  <span class="top-category-image mb-2">
+                <Link to="" className="single-top-category text-center">
+                  <span className="top-category-image mb-2">
                     <img src="img/category/cat-drinks.png" alt="" />
                   </span>
-                  <span class="top-category-name">Drinks</span>
+                  <span className="top-category-name">Drinks</span>
                 </Link>
 
-                <Link to="" class="single-top-category text-center">
-                  <span class="top-category-image mb-2">
+                <Link to="" className="single-top-category text-center">
+                  <span className="top-category-image mb-2">
                     <img src="img/category/cat-eggs.png" alt="" />
                   </span>
-                  <span class="top-category-name">Eggs</span>
+                  <span className="top-category-name">Eggs</span>
                 </Link>
 
-                <Link to="" class="single-top-category text-center">
-                  <span class="top-category-image mb-2">
+                <Link to="" className="single-top-category text-center">
+                  <span className="top-category-image mb-2">
                     <img src="img/category/cat-meats.png" alt="" />
                   </span>
-                  <span class="top-category-name">Meats</span>
+                  <span className="top-category-name">Meats</span>
                 </Link>
 
-                <Link to="" class="single-top-category text-center">
-                  <span class="top-category-image mb-2">
+                <Link to="" className="single-top-category text-center">
+                  <span className="top-category-image mb-2">
                     <img src="img/category/cat-vegetables.png" alt="" />
                   </span>
-                  <span class="top-category-name">Vegetables</span>
+                  <span className="top-category-name">Vegetables</span>
                 </Link>
               </div>
             </div>
@@ -61,54 +61,57 @@ function TopCategory(props) {
         </div>
       </section>
 
-      <section class="offers-area pd-t-150">
-        <div class="container">
-          <div class="row offers-area-full-wrap align-items-center">
-            <div class="col-lg-10">
-              <div class="offers-carousel-wrap">
-                <div class="offers-carousel">
-                  <div class="single-offer">
-                    <div class="single-food offer-item">
-                      <figure class="card card-product-grid">
-                        <div class="row align-items-center">
-                          <div class="col-md-4">
-                            <div class="img-wrap">
-                              <span class="topbar">
-                                <span class="badge badge-success"> NEW </span>
+      <section className="offers-area pd-t-150">
+        <div className="container">
+          <div className="row offers-area-full-wrap align-items-center">
+            <div className="col-lg-10">
+              <div className="offers-carousel-wrap">
+                <div className="offers-carousel">
+                  <div className="single-offer">
+                    <div className="single-food offer-item">
+                      <figure className="card card-product-grid">
+                        <div className="row align-items-center">
+                          <div className="col-md-4">
+                            <div className="img-wrap">
+                              <span className="topbar">
+                                <span className="badge badge-success">
+                                  {" "}
+                                  NEW{" "}
+                                </span>
                               </span>
                               <img src="img/trendy-foods/tf-1..png" alt="" />
-                              <span class="stc-hover">
+                              <span className="stc-hover">
                                 <Link to="#">
-                                  <i class="fa fa-search"></i>
+                                  <i className="fa fa-search"></i>
                                 </Link>
                                 <Link to="#">
-                                  <i class="fa fa-heart"></i>
+                                  <i className="fa fa-heart"></i>
                                 </Link>
                                 <Link to="#">
-                                  <i class="fa fa-shopping-cart"></i>
+                                  <i className="fa fa-shopping-cart"></i>
                                 </Link>
                               </span>
                             </div>
                           </div>
-                          <div class="col-md-8">
-                            <figcaption class="info-wrap">
-                              <Link to="#" class="title mb-3">
+                          <div className="col-md-8">
+                            <figcaption className="info-wrap">
+                              <Link to="#" className="title mb-3">
                                 Lemon
                               </Link>
-                              <div class="price-wrap mt-2">
-                                <span class="price">$25.00</span>
-                                <del class="price-old">$28.55</del>
+                              <div className="price-wrap mt-2">
+                                <span className="price">$25.00</span>
+                                <del className="price-old">$28.55</del>
                               </div>
-                              <div class="progress-wrap mb-4">
-                                <div class="mt-3 mb-2">
+                              <div className="progress-wrap mb-4">
+                                <div className="mt-3 mb-2">
                                   <span>Available: 237</span>
-                                  <span class="float-right">
+                                  <span className="float-right">
                                     Already Sold: 23
                                   </span>
                                 </div>
-                                <div class="progress">
+                                <div className="progress">
                                   <div
-                                    class="progress-bar"
+                                    className="progress-bar"
                                     role="progressbar"
                                     style={{ width: "50%" }}
                                     aria-valuenow="50"
@@ -117,18 +120,18 @@ function TopCategory(props) {
                                   ></div>
                                 </div>
                               </div>
-                              <div class="clockdiv">
+                              <div className="clockdiv">
                                 <div data-countdown="2021/03/01">
-                                  <span class="cdown day">
+                                  <span className="cdown day">
                                     133 <p>Days</p>
                                   </span>
-                                  <span class="cdown hour">
+                                  <span className="cdown hour">
                                     6 <p>Hours</p>
                                   </span>
-                                  <span class="cdown minutes">
+                                  <span className="cdown minutes">
                                     48 <p>Mins</p>
                                   </span>
-                                  <span class="cdown second">
+                                  <span className="cdown second">
                                     30 <p>Sec</p>
                                   </span>
                                 </div>
@@ -140,51 +143,51 @@ function TopCategory(props) {
                     </div>
                   </div>
 
-                  <div class="single-offer">
-                    <div class="single-food offer-item">
-                      <figure class="card card-product-grid">
-                        <div class="row align-items-center">
-                          <div class="col-md-4">
-                            <div class="img-wrap">
-                              <span class="topbar">
-                                <span class="badge badge-success">
+                  <div className="single-offer">
+                    <div className="single-food offer-item">
+                      <figure className="card card-product-grid">
+                        <div className="row align-items-center">
+                          <div className="col-md-4">
+                            <div className="img-wrap">
+                              <span className="topbar">
+                                <span className="badge badge-success">
                                   {" "}
                                   20% Offer{" "}
                                 </span>
                               </span>
                               <img src="img/trendy-foods/tf-2..png" alt="" />
-                              <span class="stc-hover">
+                              <span className="stc-hover">
                                 <Link to="#">
-                                  <i class="fa fa-search"></i>
+                                  <i className="fa fa-search"></i>
                                 </Link>
                                 <Link to="#">
-                                  <i class="fa fa-heart"></i>
+                                  <i className="fa fa-heart"></i>
                                 </Link>
                                 <Link to="#">
-                                  <i class="fa fa-shopping-cart"></i>
+                                  <i className="fa fa-shopping-cart"></i>
                                 </Link>
                               </span>
                             </div>
                           </div>
-                          <div class="col-md-8">
-                            <figcaption class="info-wrap">
-                              <Link to="#" class="title mb-3">
+                          <div className="col-md-8">
+                            <figcaption className="info-wrap">
+                              <Link to="#" className="title mb-3">
                                 Organic Tomato
                               </Link>
-                              <div class="price-wrap mt-2">
-                                <span class="price">$25.00</span>
-                                <del class="price-old">$28.55</del>
+                              <div className="price-wrap mt-2">
+                                <span className="price">$25.00</span>
+                                <del className="price-old">$28.55</del>
                               </div>
-                              <div class="progress-wrap mb-4">
-                                <div class="mt-3 mb-2">
+                              <div className="progress-wrap mb-4">
+                                <div className="mt-3 mb-2">
                                   <span>Available: 237</span>
-                                  <span class="float-right">
+                                  <span className="float-right">
                                     Already Sold: 23
                                   </span>
                                 </div>
-                                <div class="progress">
+                                <div className="progress">
                                   <div
-                                    class="progress-bar"
+                                    className="progress-bar"
                                     role="progressbar"
                                     style={{ width: "50%" }}
                                     aria-valuenow="50"
@@ -193,18 +196,18 @@ function TopCategory(props) {
                                   ></div>
                                 </div>
                               </div>
-                              <div class="clockdiv">
+                              <div className="clockdiv">
                                 <div data-countdown="2021/03/01">
-                                  <span class="cdown day">
+                                  <span className="cdown day">
                                     133 <p>Days</p>
                                   </span>
-                                  <span class="cdown hour">
+                                  <span className="cdown hour">
                                     6 <p>Hours</p>
                                   </span>
-                                  <span class="cdown minutes">
+                                  <span className="cdown minutes">
                                     48 <p>Mins</p>
                                   </span>
-                                  <span class="cdown second">
+                                  <span className="cdown second">
                                     30 <p>Sec</p>
                                   </span>
                                 </div>
@@ -216,48 +219,51 @@ function TopCategory(props) {
                     </div>
                   </div>
 
-                  <div class="single-offer">
-                    <div class="single-food offer-item">
-                      <figure class="card card-product-grid">
-                        <div class="row align-items-center">
-                          <div class="col-md-4">
-                            <div class="img-wrap">
-                              <span class="topbar">
-                                <span class="badge badge-success"> NEW </span>
+                  <div className="single-offer">
+                    <div className="single-food offer-item">
+                      <figure className="card card-product-grid">
+                        <div className="row align-items-center">
+                          <div className="col-md-4">
+                            <div className="img-wrap">
+                              <span className="topbar">
+                                <span className="badge badge-success">
+                                  {" "}
+                                  NEW{" "}
+                                </span>
                               </span>
                               <img src="img/trendy-foods/tf-3..png" alt="" />
-                              <span class="stc-hover">
+                              <span className="stc-hover">
                                 <Link to="#">
-                                  <i class="fa fa-search"></i>
+                                  <i className="fa fa-search"></i>
                                 </Link>
                                 <Link to="#">
-                                  <i class="fa fa-heart"></i>
+                                  <i className="fa fa-heart"></i>
                                 </Link>
                                 <Link to="#">
-                                  <i class="fa fa-shopping-cart"></i>
+                                  <i className="fa fa-shopping-cart"></i>
                                 </Link>
                               </span>
                             </div>
                           </div>
-                          <div class="col-md-8">
-                            <figcaption class="info-wrap">
-                              <Link to="#" class="title mb-3">
+                          <div className="col-md-8">
+                            <figcaption className="info-wrap">
+                              <Link to="#" className="title mb-3">
                                 Lemon
                               </Link>
-                              <div class="price-wrap mt-2">
-                                <span class="price">$25.00</span>
-                                <del class="price-old">$28.55</del>
+                              <div className="price-wrap mt-2">
+                                <span className="price">$25.00</span>
+                                <del className="price-old">$28.55</del>
                               </div>
-                              <div class="progress-wrap mb-4">
-                                <div class="mt-3 mb-2">
+                              <div className="progress-wrap mb-4">
+                                <div className="mt-3 mb-2">
                                   <span>Available: 237</span>
-                                  <span class="float-right">
+                                  <span className="float-right">
                                     Already Sold: 23
                                   </span>
                                 </div>
-                                <div class="progress">
+                                <div className="progress">
                                   <div
-                                    class="progress-bar"
+                                    className="progress-bar"
                                     role="progressbar"
                                     style={{ width: "50%" }}
                                     aria-valuenow="50"
@@ -266,18 +272,18 @@ function TopCategory(props) {
                                   ></div>
                                 </div>
                               </div>
-                              <div class="clockdiv">
+                              <div className="clockdiv">
                                 <div data-countdown="2021/03/01">
-                                  <span class="cdown day">
+                                  <span className="cdown day">
                                     133 <p>Days</p>
                                   </span>
-                                  <span class="cdown hour">
+                                  <span className="cdown hour">
                                     6 <p>Hours</p>
                                   </span>
-                                  <span class="cdown minutes">
+                                  <span className="cdown minutes">
                                     48 <p>Mins</p>
                                   </span>
-                                  <span class="cdown second">
+                                  <span className="cdown second">
                                     30 <p>Sec</p>
                                   </span>
                                 </div>
@@ -291,22 +297,22 @@ function TopCategory(props) {
                 </div>
               </div>
             </div>
-            <div class="col-lg-2">
-              <div class="offers-carousel-thumbnail d-none d-lg-block d-xl-block ">
-                <div class="single-offer-thumbnail">
-                  <div class="img-wrap">
+            <div className="col-lg-2">
+              <div className="offers-carousel-thumbnail d-none d-lg-block d-xl-block ">
+                <div className="single-offer-thumbnail">
+                  <div className="img-wrap">
                     <img src="img/trendy-foods/tf-1..png" alt="" />
                   </div>
                 </div>
 
-                <div class="single-offer-thumbnail">
-                  <div class="img-wrap">
+                <div className="single-offer-thumbnail">
+                  <div className="img-wrap">
                     <img src="img/trendy-foods/tf-2..png" alt="" />
                   </div>
                 </div>
 
-                <div class="single-offer-thumbnail">
-                  <div class="img-wrap">
+                <div className="single-offer-thumbnail">
+                  <div className="img-wrap">
                     <img src="img/trendy-foods/tf-3..png" alt="" />
                   </div>
                 </div>
