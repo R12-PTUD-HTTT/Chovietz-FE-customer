@@ -9,3 +9,9 @@
 .space {
     letter-spacing: 0.8px !important
 }
+.form-check-inline {
+    min-width: 20em;
+}
+.form-check-inline:hover{
+    background-color: beige;
+}

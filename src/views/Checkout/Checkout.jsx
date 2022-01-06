@@ -3,160 +3,165 @@ import './checkout.css'
 import { Link } from 'react-router-dom'
 export default function Checkout() {
     return (
-        <div class="container my-5 ">
-            <div class="row justify-content-center ">
-                <div class="col-xl-12">
-                    <div class="card shadow-lg ">
-                        <div class="row mx-auto justify-content-center text-center">
-                            <div class="col-12 mt-3 ">
-                                <nav aria-label="breadcrumb" class="second ">
-                                    <ol class="breadcrumb indigo lighten-6 first ">
-                                        <li class="breadcrumb-item font-weight-bold "><a class="black-text text-uppercase " href="#"><span class="mr-md-3 mr-1">BACK TO SHOP</span></a><i class="fa fa-angle-double-right " aria-hidden="true"></i></li>
-                                        <li class="breadcrumb-item font-weight-bold"><a class="black-text text-uppercase" href="#"><span class="mr-md-3 mr-1">Cart</span></a><i class="fa fa-angle-double-right text-uppercase " aria-hidden="true"></i></li>
-                                        <li class="breadcrumb-item font-weight-bold"><a class="black-text text-uppercase active-2" href="#"><span class="mr-md-3 mr-1">CHECKOUT</span></a></li>
+        <div className="container my-5 ">
+            <div className="row justify-content-center ">
+                <div className="col-xl-12">
+                    <div className="card shadow-lg ">
+                        <div className="row mx-auto justify-content-center text-center">
+                            <div className="col-12 mt-3 ">
+                                <nav aria-label="breadcrumb" className="second ">
+                                    <ol className="breadcrumb indigo lighten-6 first ">
+                                        <li className="breadcrumb-item font-weight-bold "><Link className="black-text text-uppercase " to="#"><span className="mr-md-3 mr-1">BACK TO SHOP</span></Link><i className="fa fa-angle-double-right " aria-hidden="true"></i></li>
+                                        <li className="breadcrumb-item font-weight-bold"><Link className="black-text text-uppercase" to="#"><span className="mr-md-3 mr-1">Cart</span></Link><i className="fa fa-angle-double-right text-uppercase " aria-hidden="true"></i></li>
+                                        <li className="breadcrumb-item font-weight-bold"><Link className="black-text text-uppercase active-2" to="#"><span className="mr-md-3 mr-1">CHECKOUT</span></Link></li>
                                     </ol>
                                 </nav>
                             </div>
                         </div>
-                        <h2 class="card-title my-2 ml-4r space">Checkout</h2>
-                        <div class="row justify-content-around">
-                            <div class="col-md-5">
-                                <div class="card border-0">
-                                    <div class="card-header pb-0">
-                                        <p class="card-text text-muted mt-4 space">THÔNG TIN GIAO HÀNG</p>
+                        <h2 className="card-title my-2 ml-4r space">Checkout</h2>
+                        <div className="row justify-content-around text-dark">
+                            <div className="col-md-5">
+                                <div className="card border-0">
+                                    <div className="card-header pb-0">
+                                        <p className="card-text mt-4 space">THÔNG TIN GIAO HÀNG <Link className=" small ml-3 text-primary"> Chỉnh sửa</Link></p>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="row justify-content-between">
-                                            <div class="col-auto mt-0">
-                                                <p><b>BBBootstrap Team Vasant Vihar 110020 New Delhi India</b></p>
-                                            </div>
-                                            <div class="col-auto">
-                                                <p><b>BBBootstrap@gmail.com</b> </p>
+                                    <div className="card-body">
+                                        <div className="row justify-content-between">
+                                            <div className="col-auto mt-0">
+                                                <p className='mb-1'><b>Người nhận hàng: Võ Ngọc Đức</b></p>
+                                                <p className='mb-1'><b>SDT: 0123478955</b></p>
+                                                <p className='mb-1'><b>Địa chỉ: 123/11 Nguyễn Biểu, Quận 5, TP Hồ Chí Minh</b> </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card border-0">
-                                    <div class="card-header pb-0">
-                                        <p class="card-text text-muted mt-4 space">PHƯƠNG THỨC THANH TOÁN</p>
+                                <div className="card border-0">
+                                    <div className="card-header pb-0">
+                                        <p className="card-text mt-4 space">PHƯƠNG THỨC THANH TOÁN</p>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="row justify-content-between">
-                                            <div class="col-auto mt-0">
-                                                <p><b>BBBootstrap Team Vasant Vihar 110020 New Delhi India</b></p>
+                                    <div className="card-body">
+                                        <div className="row justify-content-between">
+                                            <div className="col-auto mt-0">
+                                                <div className="form-check form-check-inline border border-success rounded-pill px-3 py-2 mb-2">
+                                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                                                    <label className="form-check-label ml-3" for="inlineRadio1"><b>Thanh toán khi nhận hàng</b></label>
+                                                </div>
                                             </div>
-                                            <div class="col-auto">
-                                                <p><b>BBBootstrap@gmail.com</b> </p>
+                                            <div className="col-auto mt-0">
+                                                <div className="form-check form-check-inline border border-success rounded-pill px-3 py-2 mb-2">
+                                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                                                    <label className="form-check-label ml-3" for="inlineRadio2"><b>Thẻ ngân hàng</b></label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-5">
-                                <div class="card border-0 ">
-                                    <div class="card-header pb-0">
-                                        <p class="card-text text-muted mt-4 space">ĐƠN CỦA BẠN <Link class=" small text-muted ml-3"> Chỉnh sửa</Link> </p>
+                            <div className="col-md-5">
+                                <div className="card border-0 ">
+                                    <div className="card-header pb-0">
+                                        <p className="card-text mt-4 space">ĐƠN CỦA BẠN <Link className=" small ml-3 text-primary"> Chỉnh sửa</Link> </p>
                                     </div>
-                                    <div class="card-body pt-0">
-                                        <div class="row justify-content-between">
-                                            <div class="col-auto col-md-7">
-                                                <div class="media flex-column flex-sm-row"> <img class=" img-fluid" src="https://i.imgur.com/6oHix28.jpg" width="62" height="62"/>
-                                                    <div class="media-body my-auto">
-                                                        <div class="row ">
-                                                            <div class="col-auto">
-                                                                <p class="mb-0"><b>Tên sản phẩm</b></p><small class="text-muted">descripton</small>
+                                    <div className="card-body pt-0">
+                                        <div className="row justify-content-between">
+                                            <div className="col-auto col-md-7">
+                                                <div className="media flex-column flex-sm-row"> <img className=" img-fluid" src="https://i.imgur.com/6oHix28.jpg" width="62" height="62" />
+                                                    <div className="media-body my-auto">
+                                                        <div className="row ">
+                                                            <div className="col-auto">
+                                                                <p className="mb-0"><b>Tên sản phẩm</b></p><small className="text-muted">descripton</small>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class=" pl-0 flex-sm-col col-auto my-auto">
-                                                <p class="boxed-1">2</p>
+                                            <div className=" pl-0 flex-sm-col col-auto my-auto">
+                                                <p className="boxed-1">2</p>
                                             </div>
-                                            <div class=" pl-0 flex-sm-col col-md-3 my-auto text-right">
+                                            <div className=" pl-0 flex-sm-col col-md-3 my-auto text-right">
                                                 <p><b>123000 VND</b></p>
                                             </div>
                                         </div>
-                                        <hr class="my-2"/>
-                                            <div class="row justify-content-between">
-                                                <div class="col-auto col-md-7">
-                                                    <div class="media flex-column flex-sm-row"> <img class=" img-fluid " src="https://i.imgur.com/9MHvALb.jpg" width="62" height="62"/>
-                                                        <div class="media-body my-auto">
-                                                            <div class="row ">
-                                                                <div class="col">
-                                                                    <p class="mb-0"><b>EC-GO Bag Standard</b></p><small class="text-muted">2 Week Subscription</small>
-                                                                </div>
+                                        <hr className="my-2" />
+                                        <div className="row justify-content-between">
+                                            <div className="col-auto col-md-7">
+                                                <div className="media flex-column flex-sm-row"> <img className=" img-fluid " src="https://i.imgur.com/9MHvALb.jpg" width="62" height="62" />
+                                                    <div className="media-body my-auto">
+                                                        <div className="row ">
+                                                            <div className="col">
+                                                                <p className="mb-0"><b>EC-GO Bag Standard</b></p><small className="text-muted">2 Week Subscription</small>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="pl-0 flex-sm-col col-auto my-auto">
-                                                    <p class="boxed">3</p>
-                                                </div>
-                                                <div class="pl-0 flex-sm-col col-md-3 my-auto text-right">
-                                                    <p><b>179000 VND</b></p>
-                                                </div>
-                                            </div>
-                                            <hr class="my-2"/>
-                                                <div class="row justify-content-between">
-                                                    <div class="col-auto col-md-7">
-                                                        <div class="media flex-column flex-sm-row"> <img class=" img-fluid " src="https://i.imgur.com/6oHix28.jpg" width="62" height="62"/>
-                                                            <div class="media-body my-auto">
-                                                                <div class="row ">
-                                                                    <div class="col">
-                                                                        <p class="mb-0"><b>EC-GO Bag Standard</b></p><small class="text-muted">2 Week Subscription</small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="pl-0 flex-sm-col col-auto my-auto">
-                                                        <p class="boxed-1">2</p>
-                                                    </div>
-                                                    <div class="pl-0 flex-sm-col col-md-3 my-auto text-right">
-                                                        <p><b>1234500 VND</b></p>
-                                                    </div>
-                                                </div>
-                                                <hr class="my-2"/>
-                                                    <div class="row ">
-                                                        <div class="col">
-                                                            <div class="row justify-content-between">
-                                                                <div class="col-4">
-                                                                    <p class="mb-1"><b>Tổng tiền hàng</b></p>
-                                                                </div>
-                                                                <div class="flex-sm-col col-auto">
-                                                                    <p class="mb-1"><b>179 VND</b></p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row justify-content-between">
-                                                                <div class="col">
-                                                                    <p class="mb-1"><b>Chi phí vận chuyển</b></p>
-                                                                </div>
-                                                                <div class="flex-sm-col col-auto">
-                                                                    <p class="mb-1"><b>0 VND</b></p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row justify-content-between">
-                                                                <div class="col-4">
-                                                                    <p><b>Tổng thanh toán</b></p>
-                                                                </div>
-                                                                <div class="flex-sm-col col-auto">
-                                                                    <p class="mb-1"><b>537 VND</b></p>
-                                                                </div>
-                                                            </div>
-                                                            <hr class="my-0"/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-5 mt-4 ">
-                                                        <div class="col-md-7 col-lg-6 mx-auto"><button type="button" class="btn btn-block btn-outline-primary btn-lg">ADD GIFT CODE</button></div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div className="pl-0 flex-sm-col col-auto my-auto">
+                                                <p className="boxed">3</p>
+                                            </div>
+                                            <div className="pl-0 flex-sm-col col-md-3 my-auto text-right">
+                                                <p><b>179000 VND</b></p>
+                                            </div>
+                                        </div>
+                                        <hr className="my-2" />
+                                        <div className="row justify-content-between">
+                                            <div className="col-auto col-md-7">
+                                                <div className="media flex-column flex-sm-row"> <img className=" img-fluid " src="https://i.imgur.com/6oHix28.jpg" width="62" height="62" />
+                                                    <div className="media-body my-auto">
+                                                        <div className="row ">
+                                                            <div className="col">
+                                                                <p className="mb-0"><b>EC-GO Bag Standard</b></p><small className="text-muted">2 Week Subscription</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="pl-0 flex-sm-col col-auto my-auto">
+                                                <p className="boxed-1">2</p>
+                                            </div>
+                                            <div className="pl-0 flex-sm-col col-md-3 my-auto text-right">
+                                                <p><b>1234500 VND</b></p>
+                                            </div>
+                                        </div>
+                                        <hr className="my-2" />
+                                        <div className="row ">
+                                            <div className="col">
+                                                <div className="row justify-content-between">
+                                                    <div className="col-4">
+                                                        <p className="mb-1"><b>Tổng tiền hàng</b></p>
+                                                    </div>
+                                                    <div className="flex-sm-col col-auto">
+                                                        <p className="mb-1"><b>179 VND</b></p>
+                                                    </div>
+                                                </div>
+                                                <div className="row justify-content-between">
+                                                    <div className="col">
+                                                        <p className="mb-1"><b>Chi phí vận chuyển</b></p>
+                                                    </div>
+                                                    <div className="flex-sm-col col-auto">
+                                                        <p className="mb-1"><b>0 VND</b></p>
+                                                    </div>
+                                                </div>
+                                                <div className="row justify-content-between">
+                                                    <div className="col-4">
+                                                        <p><b>Tổng thanh toán</b></p>
+                                                    </div>
+                                                    <div className="flex-sm-col col-auto">
+                                                        <p className="mb-1"><b>537 VND</b></p>
+                                                    </div>
+                                                </div>
+                                                <hr className="my-0" />
+                                            </div>
+                                        </div>
+                                        <div className="row mb-5 mt-4 ">
+                                            <div className="col-md-7 col-lg-6 mx-auto"><button type="button" className="btn btn-block btn-outline-primary btn-lg">Đặt đơn</button></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                )
+            </div>
+        </div>
+    )
 }
