@@ -16,12 +16,11 @@ function Footer(props) {
                     alt=""
                   />
                   <p className="mt-3">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dumm
+                    Luôn cung cấp sản phẩm chất lượng, nguồn gốc rõ ràng, đảm
+                    bảo an toàn vệ sinh thực phẩm.
                   </p>
                   <div className="footer-social">
-                    <h4 className="mb-3 mt-4">Follow Us</h4>
+                    <h4 className="mb-3 mt-4">Theo dõi</h4>
                     <Link title="Facebook" target="_blank" to="#">
                       <i className="fab fa-facebook-f"></i>
                     </Link>
@@ -37,47 +36,41 @@ function Footer(props) {
               <div className="col-lg-8 col-md-12 pt-md-3 pt-sm-3">
                 <div className="row">
                   <aside className="col-lg-4 col-md-4 pl-lg-5 pl-xl-5 footer-widget">
-                    <h6 className="title mb-5">Information</h6>
+                    <h6 className="title mb-5">Thông tin</h6>
                     <ul className="list-unstyled">
                       <li>
-                        <Link to="#">Home</Link>
+                        <Link to="#">Trang chủ</Link>
                       </li>
                       <li>
-                        <Link to="#">Product</Link>
+                        <Link to="#">Sản phẩm</Link>
                       </li>
                       <li>
-                        <Link to="#">Contact</Link>
+                        <Link to="#">Liên hệ : 0315498744</Link>
                       </li>
                       <li>
-                        <Link to="#">Blogs</Link>
-                      </li>
-                      <li>
-                        <Link to="#">Login</Link>
+                        <Link to="#">Đăng nhập</Link>
                       </li>
                     </ul>
                   </aside>
                   <aside className="col-lg-3 col-md-3 footer-widget">
-                    <h6 className="title mb-5">Extras</h6>
+                    <h6 className="title mb-5">Mở rộng</h6>
                     <ul className="list-unstyled">
                       <li>
-                        <Link to="#">Help Center</Link>
+                        <Link to="#">CSKH</Link>
                       </li>
                       <li>
-                        <Link to="#">Delivery Info</Link>
+                        <Link to="#">Thông tin vận chuyển</Link>
                       </li>
                       <li>
-                        <Link to="#">Privacy Policy</Link>
+                        <Link to="#">Điều khoản - chính sách</Link>
                       </li>
                       <li>
-                        <Link to="#">Terms &amp; Condition</Link>
-                      </li>
-                      <li>
-                        <Link to="#">Order &amp; Return</Link>
+                        <Link to="#">Đặt hàng &amp; Trả hàng</Link>
                       </li>
                     </ul>
                   </aside>
                   <aside className="col-lg-5 col-md-5 footer-widget">
-                    <h6 className="title mb-5">Newsletter</h6>
+                    <h6 className="title mb-5">Thông báo</h6>
                     <form className="form-inline mb-3">
                       <input
                         type="text"
@@ -85,9 +78,7 @@ function Footer(props) {
                         className="form-control"
                         name=""
                       />
-                      <button className="btn mt-3 mb-4 btn-warning">
-                        Send
-                      </button>
+                      <button className="btn mt-3 mb-4 btn-warning">Gửi</button>
                     </form>
                     <div className="payment-method">
                       <Link to="" className="mr-4">
