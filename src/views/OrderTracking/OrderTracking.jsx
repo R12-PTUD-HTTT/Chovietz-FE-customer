@@ -4,7 +4,7 @@ import './ordertracking.css'
 export default function OrderTracking() {
     return (
         <div class="container py-5">
-            <article class="card">
+            <article class="card shadow-lg">
                 <header class="card-header"> My Orders / Tracking </header>
                 <div class="card-body">
                     <h6>Order ID: OD45345345435</h6>
