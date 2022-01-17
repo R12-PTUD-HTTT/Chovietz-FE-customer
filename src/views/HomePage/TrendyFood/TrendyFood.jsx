@@ -54,16 +54,16 @@ const products = [
 function TrendyFood(props) {
   return (
     <>
-      <section class="trendy-foods-area pd-tb-120">
-        <div class="container">
-          <header class="section-heading text-center">
-            <h3 class="section-title">Trendy Foods</h3>
+      <section className="trendy-foods-area pd-tb-120">
+        <div className="container">
+          <header className="section-heading text-center">
+            <h3 className="section-title">Trendy Foods</h3>
           </header>
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="trendy-foods-filtering">
-                <div class="button-group filter-button-group text-center">
-                  <button class="active" data-filter="*">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="trendy-foods-filtering">
+                <div className="button-group filter-button-group text-center">
+                  <button className="active" data-filter="*">
                     All
                   </button>
                   <button data-filter=".featured">Featured</button>
@@ -71,36 +71,44 @@ function TrendyFood(props) {
                   <button data-filter=".onsale">Onsell</button>
                   <button data-filter=".deal">Deal</button>
                 </div>
-                <div class="row grid">
+                <div className="row grid">
                   {products?.length &&
-                    products.map((product) => (
-                      <div class="col-md-3 col-sm-6 featured grid-item">
-                        <div class="single-food">
-                          <figure class="card card-product-grid">
-                            <div class="img-wrap mb-3">
-                              <span class="topbar">
-                                <span class="badge badge-success"> NEW </span>
+                    products.map((product, index) => (
+                      <div
+                        className="col-md-3 col-sm-6 featured grid-item"
+                        key={index}
+                      >
+                        <div className="single-food">
+                          <figure className="card card-product-grid">
+                            <div className="img-wrap mb-3">
+                              <span className="topbar">
+                                <span className="badge badge-success">
+                                  {" "}
+                                  NEW{" "}
+                                </span>
                               </span>
                               <img src="img/trendy-foods/tf-1.png" alt="" />
-                              <span class="stc-hover">
+                              <span className="stc-hover">
                                 <Link to="">
-                                  <i class="fa fa-search"></i>
+                                  <i className="fa fa-search"></i>
                                 </Link>
                                 <Link to="">
-                                  <i class="fa fa-heart"></i>
+                                  <i className="fa fa-heart"></i>
                                 </Link>
                                 <Link to="">
-                                  <i class="fa fa-shopping-cart"></i>
+                                  <i className="fa fa-shopping-cart"></i>
                                 </Link>
                               </span>
                             </div>
-                            <figcaption class="info-wrap">
-                              <Link to="#" class="title mb-3">
+                            <figcaption className="info-wrap">
+                              <Link to="#" className="title mb-3">
                                 {product.nameProduct}
                               </Link>
-                              <div class="price-wrap mt-2">
-                                <span class="price">{product.salePrice} đ</span>
-                                <del class="price-old">
+                              <div className="price-wrap mt-2">
+                                <span className="price">
+                                  {product.salePrice} đ
+                                </span>
+                                <del className="price-old">
                                   {product.oldPrice} đ
                                 </del>
                               </div>
