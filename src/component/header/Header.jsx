@@ -1,6 +1,6 @@
-import React from "react";
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function Header(props) {
   return (
@@ -19,9 +19,11 @@ function Header(props) {
               <div className="col-lg-4 col-md-4 col-8 text-center">
                 <div className="search-box">
                   <input type="text" placeholder="Search for product" />
-                  <button type="submit">
-                    <i className="fa fa-search"></i>
-                  </button>
+                  <Link to="/search">
+                    <button type="submit">
+                      <i className="fa fa-search"></i>
+                    </button>
+                  </Link>
                 </div>
               </div>
               <div className="col-lg-5 col-md-5 col-5 text-right">
@@ -44,7 +46,7 @@ function Header(props) {
                   </div>
 
                   <div className="header-acc-list  header-cart">
-                    <Link to="/signup" style={{ marginRight: "5px" }}>
+                    <Link to="/signup" style={{ marginRight: '5px' }}>
                       <Button variant="light">Đăng Kí </Button>
                     </Link>
                     <Link to="/login">
@@ -67,7 +69,7 @@ function Header(props) {
                   </div>
                   <div
                     className="categories-menu-toggle"
-                    style={{ display: "none" }}
+                    style={{ display: 'none' }}
                   >
                     <ul>
                       <li>
