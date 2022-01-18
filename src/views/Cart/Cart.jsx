@@ -1,30 +1,33 @@
-import "./Cart.css";
-import React from "react";
-import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Link } from 'react-router-dom';
 
-import RowItem from "./RowItem/RowItem";
+import RowItem from './RowItem/RowItem';
 
 const productList = [
   {
-    name: "Lecture",
+    name: 'Lecture',
     weight: 2,
     price: 1.2,
+    quantity: 1,
   },
   {
-    name: "Lecture",
-    weight: 2,
+    name: 'Lecture',
+    weight: 3,
     price: 1.2,
+    quantity: 2,
   },
   {
-    name: "Lecture",
+    name: 'Lecture',
     weight: 2,
     price: 1.2,
+    quantity: 4,
   },
   {
-    name: "Lecture",
+    name: 'Lecture',
     weight: 2,
     price: 1.2,
+    quantity: 1,
   },
 ];
 function Cart(props) {
@@ -44,6 +47,8 @@ function Cart(props) {
                         </th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Price</th>
+                        <th scope="col">Subtotal</th>
+
                         <th scope="col" class="text-right"></th>
                       </tr>
                     </thead>
@@ -63,16 +68,16 @@ function Cart(props) {
                   <div class="card-body">
                     <form>
                       <div class="form-group">
-                        <label>Have coupon?</label>
+                        <label>Nhập Mã Giảm giá?</label>
                         <div class="input-group">
                           <input
                             type="text"
                             class="form-control"
                             name=""
-                            placeholder="Coupon code"
+                            placeholder="Mã giảm giá"
                           />
                           <span class="input-group-append">
-                            <button class="btn btn-primary">Apply</button>
+                            <button class="btn btn-primary">Áp dụng</button>
                           </span>
                         </div>
                       </div>
@@ -84,29 +89,15 @@ function Cart(props) {
                 <div class="card payment-card">
                   <div class="card-body">
                     <dl class="dlist-align">
-                      <dt>Total price:</dt>
-                      <dd class="text-right text-dark">USD 568</dd>
-                    </dl>
-                    <dl class="dlist-align">
-                      <dt>Discount:</dt>
-                      <dd class="text-right text-danger">USD 658</dd>
-                    </dl>
-                    <dl class="dlist-align">
-                      <dt>Total:</dt>
+                      <dt>Tổng:</dt>
                       <dd class="text-right  h5 text-success">
-                        <strong>$1,650</strong>
+                        <strong>$jhjS</strong>
                       </dd>
                     </dl>
                     <hr />
                     <p class="text-center mb-3">
-                      <Link to="">
-                        <img src="img/payments.png" height="26" />
-                      </Link>
                       <Link to="" class="boxed-btn mb-3 mt-4">
-                        Make Purchase
-                      </Link>
-                      <Link to="" class="boxed-btn btn-outline">
-                        Make Purchase
+                        Đặt hàng
                       </Link>
                     </p>
                   </div>
