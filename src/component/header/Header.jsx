@@ -1,8 +1,43 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { removeStoredUser } from "../../redux/actions/userAction";
+import { selectIsLogin } from "../../redux/selectors/userSelector";
+import { useSelector, useDispatch } from "react-redux";
 
 function Header(props) {
+  const isLogin = useSelector(selectIsLogin);
+  const dispatch = useDispatch();
+  function handleLogout() {
+    dispatch(removeStoredUser());
+  }
+  const loginElement = (
+    <Link to="/login">
+      <Button variant="success">Đăng Nhập</Button>
+    </Link>
+  );
+  const ProfileElement = (
+    <React.Fragment>
+      <Link data-toggle="dropdown" to="#" aria-expanded="false">
+        <span className="">
+          <img
+            src="img/icon/account_circle.svg"
+            alt=""
+            width="32"
+            height="32"
+          />
+        </span>
+      </Link>
+      <div className="dropdown-menu">
+        <Link className="dropdown-item" to="/profile">
+          Hồ sơ cá nhân
+        </Link>
+        <Link className="dropdown-item" to="#" onClick={handleLogout}>
+          Đăng xuất
+        </Link>
+      </div>
+    </React.Fragment>
+  );
   return (
     <>
       <header className="header-area">
@@ -24,26 +59,11 @@ function Header(props) {
                   </button>
                 </div>
               </div>
-<<<<<<< HEAD
-              <div class="col-lg-4 col-md-4 col-4 text-right">
-                <div class="header-acc-wrap">
-                <div class="header-acc-list header-account">
-                    <Link to="/login">
-                      <span class="">
-                        <img src="img/icon/account_circle.svg" alt="" width="35px" height="35px"/>
-                      </span>
-                    </Link>
-                  </div>
-                  <div class="header-acc-list header-wishlist">
-                    <Link to="wishlist.html">
-                      <span class="">
-=======
               <div className="col-lg-5 col-md-5 col-5 text-right">
                 <div className="header-acc-wrap">
                   <div className="header-acc-list header-wishlist">
                     <Link to="">
                       <span className="">
->>>>>>> dev
                         <img src="img/icon/like.png" alt="" />
                       </span>
                       <span className="item-count">3</span>
@@ -58,13 +78,13 @@ function Header(props) {
                     </Link>
                   </div>
 
-                  <div className="header-acc-list  header-cart">
+                  <div className="header-acc-list  header-signup">
                     <Link to="/signup" style={{ marginRight: "5px" }}>
                       <Button variant="light">Đăng Kí </Button>
                     </Link>
-                    <Link to="/login">
-                      <Button variant="success">Đăng Nhập </Button>
-                    </Link>
+                  </div>
+                  <div className="header-acc-list  header-account">
+                    {isLogin ? ProfileElement : loginElement}
                   </div>
                 </div>
               </div>
