@@ -1,7 +1,9 @@
 import React from "react";
 import { Route } from "react-router";
 import { Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Layout from "../Layout";
+import { selectIsLogin } from "../redux/selectors/userSelector";
 
 function RouterWrapper({
   requireLogin,
@@ -11,7 +13,8 @@ function RouterWrapper({
   ...rest
 }) {
   //check role here
-  const isLogin = false;
+  const isLogin = useSelector(selectIsLogin);
+
   if (requireLogin && !isLogin) {
     return <Redirect to="/login" />;
   }
