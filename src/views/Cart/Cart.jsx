@@ -91,7 +91,7 @@ function Cart(props) {
                     <dl class="dlist-align">
                       <dt>Tổng:</dt>
                       <dd class="text-right  h5 text-success">
-                        <strong>$jhjS</strong>
+                        <strong>123đ</strong>
                       </dd>
                     </dl>
                     <hr />
