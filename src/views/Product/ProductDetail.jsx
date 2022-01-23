@@ -25,7 +25,7 @@ function ProductDetail() {
                   </div>
                   <div class="_p-add-cart">
                     <div class="_p-qty">
-                      <span>Add Quantity</span>
+                      <span>Số lượng</span>
                       <div
                         class="value-button decrease_"
                         id=""
