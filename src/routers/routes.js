@@ -1,44 +1,50 @@
-import SignUpPage from "../component/SignUp/SignUp";
-import Cart from "../views/Cart/Cart";
-import NotFoundPage from "../views/Error/NotFoundPage";
-import HomePage from "../views/HomePage";
-import LoginPage from "../views/Login/LoginPage";
-import ChangePass from "../views/ProfileManager/ChangePass";
-import Profile from "../views/ProfileManager/Profile";
+import SignUpPage from '../component/SignUp/SignUp';
+import Cart from '../views/Cart/Cart';
+import NotFoundPage from '../views/Error/NotFoundPage';
+import HomePage from '../views/HomePage';
+import LoginPage from '../views/Login/LoginPage';
+import ChangePass from '../views/ProfileManager/ChangePass';
+import Profile from '../views/ProfileManager/Profile';
+import ProductDetail from '../views/Product/ProductDetail';
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     component: () => <HomePage />,
     requireLogin: false,
   },
   {
-    path: "/signup",
+    path: '/signup',
     component: () => <SignUpPage />,
     requireLogin: false,
   },
   {
-    path: "/changepass",
+    path: '/changepass',
     component: () => <ChangePass />,
     requireLogin: false,
   },
   {
-    path: "/login",
+    path: '/login',
     component: () => <LoginPage />,
     requireLogin: false,
   },
   {
-    path: "/cart",
+    path: '/cart',
     component: () => <Cart />,
     requireLogin: true,
   },
   {
-    path: "/profile",
+    path: '/product-detail',
+    component: () => <ProductDetail />,
+    requireLogin: false,
+  },
+  {
+    path: '/profile',
     component: () => <Profile />,
     requireLogin: true,
   },
   {
-    path: "/",
+    path: '/',
     component: () => <NotFoundPage />,
     requireLogin: false,
     exact: false,
