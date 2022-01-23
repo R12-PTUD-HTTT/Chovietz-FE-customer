@@ -3,8 +3,7 @@ import qs from "query-string";
 import { getToken } from "../utils/storageUtils";
 
 const javaAPI = axios.create({
-  baseURL:
-    process.env.JAVA_BE_API || "https://chovietz-be-java.herokuapp.com/api/",
+  baseURL: process.env.JAVA_BE_API || "http://localhost:8080/api/",
   mode: "cors",
   cache: "no-cache",
   credentials: "same-origin",

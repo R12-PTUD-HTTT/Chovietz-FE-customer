@@ -1,8 +1,10 @@
 import * as actionType from "../../constants/user/userConstant";
+
 const initState = {
   isLogin: false,
   token: "",
   role: "user",
+  userId: "",
 };
 
 export const userReducer = (state = initState, action) => {
@@ -14,6 +16,7 @@ export const userReducer = (state = initState, action) => {
         isLogin: true,
         token: action.payload.token,
         role: action.payload.userRole,
+        userId: action.payload.userId,
       };
     case actionType.RELOAD_USER_INFORMATION:
       return {
