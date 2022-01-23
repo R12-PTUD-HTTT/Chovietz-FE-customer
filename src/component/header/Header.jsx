@@ -78,11 +78,13 @@ function Header(props) {
                     </Link>
                   </div>
 
-                  <div className="header-acc-list  header-signup">
-                    <Link to="/signup" style={{ marginRight: "5px" }}>
-                      <Button variant="light">Đăng Kí </Button>
-                    </Link>
-                  </div>
+                  {!isLogin && (
+                    <div className="header-acc-list  header-signup">
+                      <Link to="/signup" style={{ marginRight: "5px" }}>
+                        <Button variant="light">Đăng Kí </Button>
+                      </Link>
+                    </div>
+                  )}
                   <div className="header-acc-list  header-account">
                     {isLogin ? ProfileElement : loginElement}
                   </div>
