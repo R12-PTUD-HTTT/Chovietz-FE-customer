@@ -1,36 +1,87 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
-
 import RowItem from './RowItem/RowItem';
+import { Fragment, useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
-const productList = [
-  {
-    name: 'Lecture',
-    weight: 2,
-    price: 1.2,
-    quantity: 1,
-  },
-  {
-    name: 'Lecture',
-    weight: 3,
-    price: 1.2,
-    quantity: 2,
-  },
-  {
-    name: 'Lecture',
-    weight: 2,
-    price: 1.2,
-    quantity: 4,
-  },
-  {
-    name: 'Lecture',
-    weight: 2,
-    price: 1.2,
-    quantity: 1,
-  },
-];
+// const products = [
+//   {
+//     id: '1',
+//     name: 'Lecture',
+//     price: 1.2,
+//     quantity: 1,
+//   },
+//   {
+//     id: '2',
+//     name: 'Lecture',
+//     price: 1.2,
+//     quantity: 2,
+//   },
+//   {
+//     id: '3',
+//     name: 'Lecture',
+//     price: 1.2,
+//     quantity: 4,
+//   },
+//   {
+//     id: '4',
+//     name: 'Lecture',
+//     price: 1.2,
+//     quantity: 1,
+//   },
+// ];
+
 function Cart(props) {
+  const [productList, setProductList] = useState([]);
+  const [total, setTotal] = useState(0);
+  useEffect(() => {
+    const getTodos = async () => {
+      try {
+        const res = await axios.get(
+          'https://localhost:44336/api/ShoppingCart/GetDataShoppingCartById/61e05ce6e22c1445424b7e14'
+        );
+        //console.log(res.data.lstCartView);
+        setProductList(res.data.lstCartView);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    getTodos();
+  }, []);
+  const calcTotal = (products) => {
+    let total_money = 0;
+    products.map((product) => {
+      total_money = total_money + product.price * product.quantity;
+    });
+    setTotal(total_money);
+  };
+  useEffect(() => {
+    productList?.length && calcTotal(productList);
+  }, [productList]);
+  const handleChangeQuantity = (quantity, idProduct) => {
+    let newProductList = productList.map((item) => {
+      if (item.id === idProduct) {
+        item.quantity = quantity;
+      }
+      return item;
+    });
+    setProductList(newProductList);
+  };
+
+  // const handleDeleteProduct = async (id) => {
+  //   try {
+  //     await axios.get(
+  //       `https://localhost:44336/api/ShoppingCart/DeleteShopCart?idUser=61e05ce6e22c1445424b7e14&IdProduct=${id}`
+  //     );
+  //     const newProducts = productList.filter((product) => product.id !== id);
+  //     setProductList(newProducts);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  //   onDeleteProduct(id);
+  //};
   return (
     <>
       <main>
@@ -55,7 +106,13 @@ function Cart(props) {
                     <tbody>
                       {productList?.length > 0 &&
                         productList?.map((product) => (
-                          <RowItem product={product} />
+                          <RowItem
+                            product={product}
+                            onChangeQuantity={(quantity) =>
+                              handleChangeQuantity(quantity, product.id)
+                            }
+                            // onDeleteProduct={(id) => handleDeleteProduct(id)}
+                          />
                         ))}
                     </tbody>
                   </table>
@@ -91,14 +148,22 @@ function Cart(props) {
                     <dl class="dlist-align">
                       <dt>Tổng:</dt>
                       <dd class="text-right  h5 text-success">
-                        <strong>123đ</strong>
+                        <strong>{total}đ</strong>
                       </dd>
                     </dl>
                     <hr />
                     <p class="text-center mb-3">
-                      <Link to="" class="boxed-btn mb-3 mt-4">
+                      <button
+                        onClick={() => {
+                          let order = productList;
+                          order.total = total;
+                          console.log(JSON.stringify(order));
+                          localStorage.setItem('order', JSON.stringify(order));
+                        }}
+                        class="boxed-btn mb-3 mt-4"
+                      >
                         Đặt hàng
-                      </Link>
+                      </button>
                     </p>
                   </div>
                   {/* card-body.// */}

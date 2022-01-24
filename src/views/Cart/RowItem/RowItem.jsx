@@ -1,8 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-function RowItem({ product, onUpdateTotal }) {
+function RowItem({
+  product,
+  onUpdateTotal,
+  onChangeQuantity,
+  // onDeleteProduct,
+}) {
   const [price, setPrice] = useState(product.price * product.quantity);
+  const handleChangeQuantity = (event) => {
+    let value = +event.target.value;
+    //console.log(value);
+    onChangeQuantity && onChangeQuantity(value);
+  };
+  const handleDeleteProduct = (id) => {
+    console.log(`Xóa ${id}`);
+    //onDeleteProduct && onDeleteProduct(id);
+  };
 
   return (
     <>
@@ -11,20 +26,20 @@ function RowItem({ product, onUpdateTotal }) {
           <figure class="itemside align-items-center">
             <div class="aside">
               <input type="checkbox"></input>
-              <img src="img/tr-bs-os/tr/tr-1.png" class="img-sm" alt="" />
+              <img src={product.imagelink} class="img-sm" alt="" />
             </div>
             <figcaption class="info">
               <Link to="#" class="title text-dark">
                 {product.name}
               </Link>
-              <p class="text-muted small">{product.weight} Kg</p>
+              <p class="text-muted small">{product.store_name}</p>
             </figcaption>
           </figure>
         </td>
         <td>
           <select
             id="select-quanlity"
-            onChange={(e) => setPrice(product.price * e.target.value)}
+            onChange={handleChangeQuantity}
             class="form-control"
           >
             <option selected={product.quantity === 1} value={1}>
@@ -52,14 +67,18 @@ function RowItem({ product, onUpdateTotal }) {
         </td>
         <td>
           <div class="price-wrap">
-            <var class="price">{price.toFixed(1)}</var>
+            <var class="price">{product.price * product.quantity}</var>
           </div>
           {/* price-wrap .// */}
         </td>
         <td class="text-right">
-          <Link to="" class="btn btn-danger btn-remove">
-            <i class="fa fa-trash" aria-hidden="true"></i>
-          </Link>
+          <button
+            onClick={handleDeleteProduct(product.id)}
+            class="btn btn-danger btn-remove"
+          >
+            {/*<i class="fa fa-trash" aria-hidden="true"></i>*/}
+            Xóa
+          </button>
         </td>
       </tr>
     </>
