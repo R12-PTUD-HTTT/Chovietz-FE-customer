@@ -1,5 +1,4 @@
-
-import SignUpCustomer from '../views/SignUp/SignUpCustomer';
+import SignUpCustomer from "../views/SignUp/SignUpCustomer";
 import SignUpPage from "../component/SignUp/SignUp";
 import Cart from "../views/Cart/Cart";
 import Checkout from "../views/Checkout/Checkout";
@@ -8,41 +7,41 @@ import HomePage from "../views/HomePage";
 import LoginPage from "../views/Login/LoginPage";
 import ChangePass from "../views/ProfileManager/ChangePass";
 import Profile from "../views/ProfileManager/Profile";
+import ProductSearchResult from "../views/products/ProductSearchResult";
 
 const routes = [
   {
-    path: '/',
+    path: "/",
     component: () => <HomePage />,
     requireLogin: false,
   },
   {
-    path: '/signup',
+    path: "/signup",
     component: () => <SignUpPage />,
     requireLogin: false,
   },
   {
-    path: '/signup-customer',
+    path: "/signup-customer",
     component: () => <SignUpCustomer />,
     requireLogin: false,
   },
   {
-
-    path: '/changepass',
+    path: "/changepass",
     component: () => <ChangePass />,
     requireLogin: false,
   },
   {
-    path: '/login',
+    path: "/login",
     component: () => <LoginPage />,
     requireLogin: false,
   },
   {
-    path: '/cart',
+    path: "/cart",
     component: () => <Cart />,
     requireLogin: true,
   },
   {
-    path: '/profile',
+    path: "/profile",
     component: () => <Profile />,
     requireLogin: true,
   },
@@ -52,7 +51,12 @@ const routes = [
     requireLogin: true,
   },
   {
-    path: '/',
+    path: "/product/search/:key",
+    component: () => <ProductSearchResult />,
+    requireLogin: false,
+  },
+  {
+    path: "/",
     component: () => <NotFoundPage />,
     requireLogin: false,
     exact: false,

@@ -1,13 +1,16 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { removeStoredUser } from '../../redux/actions/userAction';
-import { selectIsLogin } from '../../redux/selectors/userSelector';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { removeStoredUser } from "../../redux/actions/userAction";
+import { selectIsLogin } from "../../redux/selectors/userSelector";
+import { useSelector, useDispatch } from "react-redux";
 
 function Header(props) {
   const isLogin = useSelector(selectIsLogin);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const [key, setKey] = useState("");
   function handleLogout() {
     dispatch(removeStoredUser());
   }
@@ -16,6 +19,13 @@ function Header(props) {
       <Button variant="success">Đăng Nhập</Button>
     </Link>
   );
+  const handleChangeKey = (event) => {
+    const value = event.target.value;
+    setKey(value);
+  };
+  const handleSearch = () => {
+    history.push(`/product/search/${key}`);
+  };
   const ProfileElement = (
     <React.Fragment>
       <Link data-toggle="dropdown" to="#" aria-expanded="false">
@@ -53,8 +63,13 @@ function Header(props) {
               </div>
               <div className="col-lg-4 col-md-4 col-8 text-center">
                 <div className="search-box">
-                  <input type="text" placeholder="Search for product" />
-                  <button type="submit">
+                  <input
+                    type="text"
+                    placeholder="Search for product"
+                    value={key}
+                    onChange={handleChangeKey}
+                  />
+                  <button onClick={handleSearch}>
                     <i className="fa fa-search"></i>
                   </button>
                 </div>
@@ -79,7 +94,7 @@ function Header(props) {
                   </div>
 
                   <div className="header-acc-list  header-cart">
-                    <Link to="/signup-customer" style={{ marginRight: '5px' }}>
+                    <Link to="/signup-customer" style={{ marginRight: "5px" }}>
                       <Button variant="light">Đăng Kí </Button>
                     </Link>
                     {/* <Link to="/login">
@@ -106,7 +121,7 @@ function Header(props) {
                   </div>
                   <div
                     className="categories-menu-toggle"
-                    style={{ display: 'none' }}
+                    style={{ display: "none" }}
                   >
                     <ul>
                       <li>
