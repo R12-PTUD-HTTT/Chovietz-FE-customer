@@ -5,33 +5,6 @@ import { Fragment, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-// const products = [
-//   {
-//     id: '1',
-//     name: 'Lecture',
-//     price: 1.2,
-//     quantity: 1,
-//   },
-//   {
-//     id: '2',
-//     name: 'Lecture',
-//     price: 1.2,
-//     quantity: 2,
-//   },
-//   {
-//     id: '3',
-//     name: 'Lecture',
-//     price: 1.2,
-//     quantity: 4,
-//   },
-//   {
-//     id: '4',
-//     name: 'Lecture',
-//     price: 1.2,
-//     quantity: 1,
-//   },
-// ];
-
 function Cart(props) {
   const [productList, setProductList] = useState([]);
   const [total, setTotal] = useState(0);
@@ -39,7 +12,7 @@ function Cart(props) {
     const getProducts = async () => {
       try {
         const res = await axios.get(
-          'https://localhost:44336/api/ShoppingCart/GetDataShoppingCartById/61e05ce6e22c1445424b7e14'
+          'https://localhost:44336/api/ShoppingCart/GetDataShoppingCartById/61e2a00631f2514657b67942'
         );
         console.log(res.data.lstCartView);
         setProductList(res.data.lstCartView);
@@ -73,7 +46,7 @@ function Cart(props) {
   const handleDeleteProduct = async (id) => {
     try {
       const res = await axios.get(
-        `https://localhost:44336/api/ShoppingCart/DeleteShopCart?idUser=61e05ce6e22c1445424b7e14&IdProduct=${id}`
+        `https://localhost:44336/api/ShoppingCart/DeleteShopCart?idUser=61e2a00631f2514657b67942&IdProduct=${id}`
       );
       console.log(res.data);
       const newProducts = productList.filter((product) => product.id !== id);
