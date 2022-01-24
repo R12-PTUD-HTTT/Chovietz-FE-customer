@@ -36,19 +36,19 @@ function Cart(props) {
   const [productList, setProductList] = useState([]);
   const [total, setTotal] = useState(0);
   useEffect(() => {
-    const getTodos = async () => {
+    const getProducts = async () => {
       try {
         const res = await axios.get(
           'https://localhost:44336/api/ShoppingCart/GetDataShoppingCartById/61e05ce6e22c1445424b7e14'
         );
-        //console.log(res.data.lstCartView);
+        console.log(res.data.lstCartView);
         setProductList(res.data.lstCartView);
       } catch (error) {
         console.log(error.message);
       }
     };
 
-    getTodos();
+    getProducts();
   }, []);
   const calcTotal = (products) => {
     let total_money = 0;
@@ -70,18 +70,19 @@ function Cart(props) {
     setProductList(newProductList);
   };
 
-  // const handleDeleteProduct = async (id) => {
-  //   try {
-  //     await axios.get(
-  //       `https://localhost:44336/api/ShoppingCart/DeleteShopCart?idUser=61e05ce6e22c1445424b7e14&IdProduct=${id}`
-  //     );
-  //     const newProducts = productList.filter((product) => product.id !== id);
-  //     setProductList(newProducts);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  //   onDeleteProduct(id);
-  //};
+  const handleDeleteProduct = async (id) => {
+    try {
+      const res = await axios.get(
+        `https://localhost:44336/api/ShoppingCart/DeleteShopCart?idUser=61e05ce6e22c1445424b7e14&IdProduct=${id}`
+      );
+      console.log(res.data);
+      const newProducts = productList.filter((product) => product.id !== id);
+      setProductList(newProducts);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <>
       <main>
@@ -94,11 +95,11 @@ function Cart(props) {
                     <thead class="text-muted mb-3">
                       <tr class="small text-uppercase">
                         <th scope="col" class="sm-w">
-                          Product
+                          Sản phẩm
                         </th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Subtotal</th>
+                        <th scope="col">Số Lượng</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Tổng</th>
 
                         <th scope="col" class="text-right"></th>
                       </tr>
@@ -111,7 +112,7 @@ function Cart(props) {
                             onChangeQuantity={(quantity) =>
                               handleChangeQuantity(quantity, product.id)
                             }
-                            // onDeleteProduct={(id) => handleDeleteProduct(id)}
+                            onDeleteProduct={(id) => handleDeleteProduct(id)}
                           />
                         ))}
                     </tbody>

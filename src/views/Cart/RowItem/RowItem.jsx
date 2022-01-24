@@ -6,7 +6,7 @@ function RowItem({
   product,
   onUpdateTotal,
   onChangeQuantity,
-  // onDeleteProduct,
+  onDeleteProduct,
 }) {
   const [price, setPrice] = useState(product.price * product.quantity);
   const handleChangeQuantity = (event) => {
@@ -15,8 +15,8 @@ function RowItem({
     onChangeQuantity && onChangeQuantity(value);
   };
   const handleDeleteProduct = (id) => {
-    console.log(`Xóa ${id}`);
-    //onDeleteProduct && onDeleteProduct(id);
+    //console.log(`Xóa ${id}`);
+    onDeleteProduct && onDeleteProduct(id);
   };
 
   return (
@@ -73,7 +73,7 @@ function RowItem({
         </td>
         <td class="text-right">
           <button
-            onClick={handleDeleteProduct(product.id)}
+            onClick={() => handleDeleteProduct(product.id)}
             class="btn btn-danger btn-remove"
           >
             {/*<i class="fa fa-trash" aria-hidden="true"></i>*/}
