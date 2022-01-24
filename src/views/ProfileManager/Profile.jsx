@@ -1,8 +1,29 @@
 import React from 'react';
 import './styleProfile.css';
 import Subnav from '../../component/Subnav/Subnav';
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { selectIsLogin,  selectUserId} from "../../redux/selectors/userSelector";
+import { fetchUserProfile } from "../../api/user";
 
 export default function Profile() {
+    const [data, setData] = useState({
+        name: "test",
+        gender: "Nam",
+        date_of_birth: "14/08/2000",
+        email: "asd@gmail.com",
+        phoneNumber: "0935028166",
+    });
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        console.log(`${name} ${value}`);
+        setData({ ...data, [name]: value });
+      };
+    useEffect(async ()=>{
+        const profile = await fetchUserProfile();
+        console.log(profile);
+    },[]);
     return (
         <div className="row body-page">
             <div className="col-sm-4">
@@ -24,7 +45,7 @@ export default function Profile() {
                                     <div className="content-value">
                                         <div className="input-with-validator-wrapper">
                                             <div className="input-with-validator">
-                                                <input type="text" className="form-control" maxLength="255" />
+                                                <input type="text" className="form-control" maxLength="255" name='name' onChange={handleChange} value={data.name || ""}/>
                                             </div>
                                         </div>
                                     </div>
@@ -35,11 +56,11 @@ export default function Profile() {
                                     </div>
                                     <div className="content-value mx-4">
                                         <div className="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="customRadioInline1" name="customRadioInline1" className="custom-control-input" />
+                                            <input type="radio" id="customRadioInline1" name="gender" className="custom-control-input" onChange={handleChange} checked={data.gender === "Nam"} value={"Nam"}/>
                                             <label className="custom-control-label" htmlFor="customRadioInline1">Nam</label>
                                         </div>
                                         <div className="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="customRadioInline2" name="customRadioInline1" className="custom-control-input" />
+                                            <input type="radio" id="customRadioInline2" name="gender" className="custom-control-input" onChange={handleChange} checked={data.gender === "Nữ"} value={"Nữ"}/>
                                             <label className="custom-control-label" htmlFor="customRadioInline2">Nữ</label>
                                         </div>
                                     </div>
@@ -53,7 +74,7 @@ export default function Profile() {
                                     <div className="content-value">
                                         <div className="input-with-validator-wrapper">
                                             <div className="input-with-validator">
-                                                <input type="text" className="form-control" maxLength="255" />
+                                                <input type="date" className="form-control" maxLength="255" name='date_of_birth' onChange={handleChange} value={data.date_of_birth || ""}/>
                                             </div>
                                         </div>
                                     </div>
@@ -65,7 +86,7 @@ export default function Profile() {
                                     <div className="content-value">
                                         <div className="input-with-validator-wrapper">
                                             <div className="input-with-validator">
-                                                <input type="email" className="form-control" maxLength="255" />
+                                                <input type="email" className="form-control" maxLength="255" name='email' onChange={handleChange} value={data.email || ""}/>
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +98,7 @@ export default function Profile() {
                                     <div className="content-value">
                                         <div className="input-with-validator-wrapper">
                                             <div className="input-with-validator">
-                                                <input type="text" className="form-control" maxLength="255" />
+                                                <input type="text" className="form-control" maxLength="255" name='phoneNumber' onChange={handleChange} value={data.phoneNumber || ""}/>
                                             </div>
                                         </div>
                                     </div>
