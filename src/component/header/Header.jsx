@@ -1,8 +1,43 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { removeStoredUser } from "../../redux/actions/userAction";
+import { selectIsLogin } from "../../redux/selectors/userSelector";
+import { useSelector, useDispatch } from "react-redux";
 
 function Header(props) {
+  const isLogin = useSelector(selectIsLogin);
+  const dispatch = useDispatch();
+  function handleLogout() {
+    dispatch(removeStoredUser());
+  }
+  const loginElement = (
+    <Link to="/login">
+      <Button variant="success">Đăng Nhập</Button>
+    </Link>
+  );
+  const ProfileElement = (
+    <React.Fragment>
+      <Link data-toggle="dropdown" to="#" aria-expanded="false">
+        <span className="">
+          <img
+            src="img/icon/account_circle.svg"
+            alt=""
+            width="32"
+            height="32"
+          />
+        </span>
+      </Link>
+      <div className="dropdown-menu">
+        <Link className="dropdown-item" to="/profile">
+          Hồ sơ cá nhân
+        </Link>
+        <Link className="dropdown-item" to="#" onClick={handleLogout}>
+          Đăng xuất
+        </Link>
+      </div>
+    </React.Fragment>
+  );
   return (
     <>
       <header className="header-area">
@@ -43,13 +78,15 @@ function Header(props) {
                     </Link>
                   </div>
 
-                  <div className="header-acc-list  header-cart">
-                    <Link to="/signup" style={{ marginRight: "5px" }}>
-                      <Button variant="light">Đăng Kí </Button>
-                    </Link>
-                    <Link to="/login">
-                      <Button variant="success">Đăng Nhập </Button>
-                    </Link>
+                  {!isLogin && (
+                    <div className="header-acc-list  header-signup">
+                      <Link to="/signup" style={{ marginRight: "5px" }}>
+                        <Button variant="light">Đăng Kí </Button>
+                      </Link>
+                    </div>
+                  )}
+                  <div className="header-acc-list  header-account">
+                    {isLogin ? ProfileElement : loginElement}
                   </div>
                 </div>
               </div>
