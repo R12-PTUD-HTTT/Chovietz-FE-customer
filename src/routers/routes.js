@@ -9,6 +9,7 @@ import ChangePass from '../views/ProfileManager/ChangePass';
 import Profile from '../views/ProfileManager/Profile';
 import SearchPage from '../views/SearchPage/SearchPage';
 import ProductDetail from '../views/ProductPage/ProductDetail';
+import ProductPage from '../views/ProductPage/Product';
 
 const routes = [
   {
@@ -50,6 +51,11 @@ const routes = [
     path: '/checkout',
     component: () => <Checkout />,
     requireLogin: true,
+  },
+  {
+    path: '/products',
+    component: () => <ProductPage />,
+    requireLogin: false,
   },
   {
     path: '/product/search/:key',
