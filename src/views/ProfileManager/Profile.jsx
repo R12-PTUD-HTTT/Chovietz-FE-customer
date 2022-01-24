@@ -4,13 +4,17 @@ import Subnav from '../../component/Subnav/Subnav';
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { selectIsLogin,  selectUserId} from "../../redux/selectors/userSelector";
-import { fetchUserProfile } from "../../api/user";
+import { fetchUserProfile, updateUserProfile } from "../../api/user";
+import CustomAlert from '../../component/Alert/CustomAlert';
 
 export default function Profile() {
+    const [mess, setMess] = useState("");
+    const [isAlert, setIsAlert] = useState(false);
+    const [variant, setVariant] = useState("success");
     const [data, setData] = useState({
-        name: "test",
+        name: "",
         gender: "Nam",
-        date_of_birth: "2012-3-23",
+        date_of_birth: "",
         email: "",
         phoneNumber: "",
     });
@@ -20,20 +24,34 @@ export default function Profile() {
         console.log(`${name} ${value}`);
         setData({ ...data, [name]: value });
       };
-    // useEffect(async ()=>{
-    //     try {
-    //         const profile = await fetchUserProfile();
-    //         setData({...data,
-    //             name: profile.name,
-    //             gender: profile.gender,
-    //             date_of_birth: profile.date_of_birth,
-    //             email: profile.email,
-    //             phoneNumber: profile.phoneNumber})
-    //     console.log(profile);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // },[]);
+    useEffect(async ()=>{
+        try {
+            const profileRes = await fetchUserProfile();
+            const profile = profileRes.data;
+             console.log(profile);
+            setData({...data,
+                name: profile.name,
+                gender: profile.gender,
+                date_of_birth: profile.date_of_birth.substring(0, 10),
+                email: profile.email,
+                phoneNumber: profile.phoneNumber})
+        } catch (error) {
+            console.log(error);
+        }
+    },[]);
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log(data);
+        try {
+            const result = await updateUserProfile(data);
+            if(result.status === 200){
+                setMess("Thay đổi thông tin thành công");
+                setIsAlert(true);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <div className="row body-page">
             <div className="col-sm-4">
@@ -47,7 +65,7 @@ export default function Profile() {
                     </div>
                     <div className="profile-body">
                         <div className="profile-body-content">
-                            <form>
+                            <form method='put' onSubmit={handleSubmit}>
                                 <div className="body-content">
                                     <div className="content-name">
                                         <label>Tên</label>
@@ -118,6 +136,11 @@ export default function Profile() {
                                 </div>
                             </form>
                         </div>
+                        <CustomAlert
+                        message={mess}
+                        isShow={isAlert}
+                        onClose={setIsAlert}
+                        variant={variant}/>
                     </div>
                 </div>
             </div>
