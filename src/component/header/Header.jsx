@@ -1,9 +1,9 @@
-import React from "react";
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { removeStoredUser } from "../../redux/actions/userAction";
-import { selectIsLogin } from "../../redux/selectors/userSelector";
-import { useSelector, useDispatch } from "react-redux";
+import React from 'react';
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { removeStoredUser } from '../../redux/actions/userAction';
+import { selectIsLogin } from '../../redux/selectors/userSelector';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Header(props) {
   const isLogin = useSelector(selectIsLogin);
@@ -78,15 +78,17 @@ function Header(props) {
                     </Link>
                   </div>
 
-                  {!isLogin && (
-                    <div className="header-acc-list  header-signup">
-                      <Link to="/signup" style={{ marginRight: "5px" }}>
-                        <Button variant="light">Đăng Kí </Button>
-                      </Link>
+                  <div className="header-acc-list  header-cart">
+                    <Link to="/signup-customer" style={{ marginRight: '5px' }}>
+                      <Button variant="light">Đăng Kí </Button>
+                    </Link>
+                    {/* <Link to="/login">
+                      <Button variant="success">Đăng Nhập </Button>
+                    </Link> */}
+
+                    <div className="header-acc-list  header-account">
+                      {isLogin ? ProfileElement : loginElement}
                     </div>
-                  )}
-                  <div className="header-acc-list  header-account">
-                    {isLogin ? ProfileElement : loginElement}
                   </div>
                 </div>
               </div>
@@ -104,7 +106,7 @@ function Header(props) {
                   </div>
                   <div
                     className="categories-menu-toggle"
-                    style={{ display: "none" }}
+                    style={{ display: 'none' }}
                   >
                     <ul>
                       <li>

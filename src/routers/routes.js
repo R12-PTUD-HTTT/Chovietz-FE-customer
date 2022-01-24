@@ -1,3 +1,5 @@
+
+import SignUpCustomer from '../views/SignUp/SignUpCustomer';
 import SignUpPage from "../component/SignUp/SignUp";
 import Cart from "../views/Cart/Cart";
 import Checkout from "../views/Checkout/Checkout";
@@ -9,32 +11,38 @@ import Profile from "../views/ProfileManager/Profile";
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     component: () => <HomePage />,
     requireLogin: false,
   },
   {
-    path: "/signup",
+    path: '/signup',
     component: () => <SignUpPage />,
     requireLogin: false,
   },
   {
-    path: "/changepass",
+    path: '/signup-customer',
+    component: () => <SignUpCustomer />,
+    requireLogin: false,
+  },
+  {
+
+    path: '/changepass',
     component: () => <ChangePass />,
     requireLogin: false,
   },
   {
-    path: "/login",
+    path: '/login',
     component: () => <LoginPage />,
     requireLogin: false,
   },
   {
-    path: "/cart",
+    path: '/cart',
     component: () => <Cart />,
     requireLogin: true,
   },
   {
-    path: "/profile",
+    path: '/profile',
     component: () => <Profile />,
     requireLogin: true,
   },
@@ -44,7 +52,7 @@ const routes = [
     requireLogin: true,
   },
   {
-    path: "/",
+    path: '/',
     component: () => <NotFoundPage />,
     requireLogin: false,
     exact: false,
