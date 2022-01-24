@@ -1,4 +1,5 @@
 
+import SignUpCustomer from '../views/SignUp/SignUpCustomer';
 import SignUpPage from "../component/SignUp/SignUp";
 import Cart from "../views/Cart/Cart";
 import Checkout from "../views/Checkout/Checkout";
@@ -20,6 +21,12 @@ const routes = [
     requireLogin: false,
   },
   {
+    path: '/signup-customer',
+    component: () => <SignUpCustomer />,
+    requireLogin: false,
+  },
+  {
+
     path: '/changepass',
     component: () => <ChangePass />,
     requireLogin: false,

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "./checkout.css";
@@ -175,6 +176,7 @@ export default function Checkout() {
                 <div className="card border-0">
                   <div className="card-header pb-0">
                     <p className="card-text mt-4 space">
+
                       THÔNG TIN GIAO HÀNG{" "}
                       <Link
                         className=" small ml-3 text-primary"
@@ -185,6 +187,7 @@ export default function Checkout() {
                       </Link>
                     </p>
                   </div>
+
                   {!!order.receiver && (
                     <div className="card-body">
                       <div className="row justify-content-between">
@@ -318,6 +321,7 @@ export default function Checkout() {
                           </div>
                           <div className="flex-sm-col col-auto">
                             <p className="mb-1">
+
                               <b>{order.total_price}</b> VND
                             </p>
                           </div>
@@ -342,6 +346,7 @@ export default function Checkout() {
                           </div>
                           <div className="flex-sm-col col-auto">
                             <p className="mb-1">
+
                               <b style={{ color: "red" }}>
                                 {defaultDeliveryCost + order.total_price}{" "}
                               </b>

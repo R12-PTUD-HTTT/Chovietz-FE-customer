@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -78,6 +79,14 @@ function Header(props) {
                     </Link>
                   </div>
 
+                  <div className="header-acc-list  header-cart">
+                    <Link to="/signup-customer" style={{ marginRight: '5px' }}>
+                      <Button variant="light">Đăng Kí </Button>
+                    </Link>
+                    <Link to="/login">
+                      <Button variant="success">Đăng Nhập </Button>
+                    </Link>
+
                   {!isLogin && (
                     <div className="header-acc-list  header-signup">
                       <Link to="/signup" style={{ marginRight: "5px" }}>
@@ -104,7 +113,7 @@ function Header(props) {
                   </div>
                   <div
                     className="categories-menu-toggle"
-                    style={{ display: "none" }}
+                    style={{ display: 'none' }}
                   >
                     <ul>
                       <li>
