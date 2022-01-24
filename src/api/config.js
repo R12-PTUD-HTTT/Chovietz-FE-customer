@@ -3,8 +3,7 @@ import qs from "query-string";
 import { getToken } from "../utils/storageUtils";
 
 const javaAPI = axios.create({
-  baseURL:
-    process.env.JAVA_BE_API || "https://chovietz-be-java.herokuapp.com/api/",
+  baseURL: process.env.JAVA_BE_API || "http://localhost:8080/api/",
   mode: "cors",
   cache: "no-cache",
   credentials: "same-origin",
@@ -32,8 +31,7 @@ javaAPI.interceptors.response.use(
 );
 
 const cSharpAPI = axios.create({
-  baseURL:
-    process.env.CSHARP_BE_API || "https://chovietz-be-csharp.herokuapp.com/",
+  baseURL: process.env.CSHARP_BE_API || "https://localhost:44336/api/",
   mode: "cors",
   cache: "no-cache",
   credentials: "same-origin",

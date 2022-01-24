@@ -1,11 +1,14 @@
-import SignUpPage from '../component/SignUp/SignUp';
-import Cart from '../views/Cart/Cart';
-import NotFoundPage from '../views/Error/NotFoundPage';
-import HomePage from '../views/HomePage';
-import LoginPage from '../views/Login/LoginPage';
-import ChangePass from '../views/ProfileManager/ChangePass';
-import Profile from '../views/ProfileManager/Profile';
+
 import SignUpCustomer from '../views/SignUp/SignUpCustomer';
+import SignUpPage from "../component/SignUp/SignUp";
+import Cart from "../views/Cart/Cart";
+import Checkout from "../views/Checkout/Checkout";
+import NotFoundPage from "../views/Error/NotFoundPage";
+import HomePage from "../views/HomePage";
+import LoginPage from "../views/Login/LoginPage";
+import ChangePass from "../views/ProfileManager/ChangePass";
+import Profile from "../views/ProfileManager/Profile";
+
 const routes = [
   {
     path: '/',
@@ -23,6 +26,7 @@ const routes = [
     requireLogin: false,
   },
   {
+
     path: '/changepass',
     component: () => <ChangePass />,
     requireLogin: false,
@@ -35,12 +39,17 @@ const routes = [
   {
     path: '/cart',
     component: () => <Cart />,
-    requireLogin: false,
+    requireLogin: true,
   },
   {
     path: '/profile',
     component: () => <Profile />,
-    requireLogin: false,
+    requireLogin: true,
+  },
+  {
+    path: "/checkout",
+    component: () => <Checkout />,
+    requireLogin: true,
   },
   {
     path: '/',
