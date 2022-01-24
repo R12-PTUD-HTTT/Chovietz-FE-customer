@@ -8,7 +8,7 @@ const SignUpPage = () => {
       <main>
         <div className="container">
           <div className="cad card m-5">
-            <h3 className="text-center mb-4">Đăng ký bán hàng</h3>
+            <h3 className="text-center mb-4">Đăng ký Mua hàng</h3>
             <form className="form-card" onsubmit="event.preventDefault()">
               <div className="row justify-content-between text-left">
                 <div className="form-group col-sm-6 flex-column d-flex">
