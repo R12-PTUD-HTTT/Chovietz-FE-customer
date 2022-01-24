@@ -4,24 +4,51 @@ import styles from './ProductDetail.css';
 import axios from 'axios';
 
 function ProductDetail() {
+  const AddtoCart = () => {
+    console.log('call api');
+    return axios
+      .get(
+        `https://localhost:44336/api/ShoppingCart/InsertShopCart?IdUser=61e2a00631f2514657b67942&IdProduct=61e033acf37afea1e5e2b8d6&quantity=${quantity}`
+      )
+      .then((response) => console.log(response));
+  };
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  useEffect(() => {
+    const fetchProductDetail = async () => {
+      try {
+        const res = await axios
+          .get(`https://localhost:44336/api/Product/61e03382f37afea1e5e2b8d5`)
+          .then((res) => {
+            setProduct(res.data);
+            console.log(res.data);
+          })
+          .catch((err) => console.log(err));
+      } catch (error) {
+        console.log('Failed to get Product', error);
+      }
+    };
+    fetchProductDetail();
+  }, []);
   return (
     <>
       <section id="services" class="services section-bg">
         <div class="container-fluid">
           <div class="row row-sm">
             <div class="col-md-4 _boxzoom">
-              <img src="https://images.elipsport.vn/anh-seo-tin-tuc/2021/1/25/co-nen-an-khoai-lang-luc-doi-hay-khong-tai-sao-1.jpg" />
+              <img src={product.image_link} />
             </div>
             <div class="col-md-6">
               <div class="_product-detail-content">
-                <p class="_p-name"> Khoai lang </p>
+                <p class="_p-name">{product.name} </p>
                 <div class="_p-price-box">
                   <div class="p-list">
                     <span>
                       {' '}
-                      Giá gốc : <i class="fa fa-inr"></i> <del> 1399 </del>{' '}
+                      Giá gốc : <i class="fa fa-inr"></i>{' '}
+                      <del> {product.price} </del>{' '}
                     </span>
-                    <span class="price"> {`Chỉ còn 600đ`} </span>
+                    <span class="price">Chỉ còn {product.sale_price} đ </span>
                   </div>
                   <div class="_p-add-cart">
                     <div class="_p-qty">
@@ -30,14 +57,26 @@ function ProductDetail() {
                         class="value-button decrease_"
                         id=""
                         value="Decrease Value"
+                        onClick={() => {
+                          if (quantity === 1) setQuantity(quantity);
+                          else setQuantity(quantity - 1);
+                        }}
                       >
                         -
                       </div>
-                      <input type="number" name="qty" id="number" value="1" />
+                      <input
+                        type="number"
+                        name="qty"
+                        id="number"
+                        value={quantity}
+                      />
                       <div
                         class="value-button increase_"
                         id=""
                         value="Increase Value"
+                        onClick={() => {
+                          setQuantity(quantity + 1);
+                        }}
                       >
                         +
                       </div>
@@ -45,7 +84,11 @@ function ProductDetail() {
                   </div>
                   <div class="_p-features">
                     <span> Mô tả: </span>
-                    Khoai lang xuất xứ ....
+                    {product.description}
+                  </div>
+                  <div class="_p-features">
+                    <span> Cửa hàng: </span>
+                    {product.store_name}
                   </div>
                   <form action="" method="post" accept-charset="utf-8">
                     <ul class="spe_ul"></ul>
@@ -54,7 +97,12 @@ function ProductDetail() {
                         <button class="btn-theme btn buy-btn" tabindex="0">
                           <i class="fa fa-shopping-cart"></i> Mua ngay
                         </button>
-                        <button class="btn-theme btn btn-success" tabindex="0">
+
+                        <button
+                          //onClick={AddtoCart}
+                          class="btn-theme btn btn-success"
+                          tabindex="0"
+                        >
                           <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
                         </button>
                         <input type="hidden" name="pid" value="18" />
