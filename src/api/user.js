@@ -7,3 +7,6 @@ export const fetchUserProfile = async () => {
   console.log(user);
   return await javaAPI.get(`/user/customer/${user.userId}`);
 };
+export const getUserInfor = async (id) => {
+  return await javaAPI.get(`/user/customer/${id}`);
+};
