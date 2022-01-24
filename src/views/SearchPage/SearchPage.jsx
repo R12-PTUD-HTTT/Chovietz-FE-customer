@@ -11,24 +11,13 @@ function SearchPage(props) {
   const { key } = useParams();
   //console.log(key);
   const [products, setProducts] = useState([]);
-
-  //   useEffect(() => {
-  //     const getProducts = () => {
-  //       fetch(
-  //         `https://localhost:44336/api/ShoppingCart/FindProductByKey?name=${key}&fromPrice=5000&toPrice=1000000&type=food`
-  //       )
-  //         .then((res) => res.json())
-  //         .then((products) => setProducts(products));
-  //       console.log(key);
-  //       console.log(products);
-  //     };
-  //     getProducts();
-  //   }, []);
+  const [fromPrice, setFromPrice] = useState(0);
+  const [toPrice, setToPrice] = useState(0);
   useEffect(() => {
     const getProducts = async () => {
       try {
         const res = await axios.get(
-          `https://localhost:44336/api/ShoppingCart/FindProductByKey?name=${key}&fromPrice=5000&toPrice=1000000&type=food`
+          `https://localhost:44336/api/ShoppingCart/FindProductByKey?name=${key}&fromPrice=0&toPrice=10000000&type=food`
         );
         console.log(res.data);
         setProducts(res.data);
@@ -45,6 +34,17 @@ function SearchPage(props) {
     localStorage.setItem('product_id', id);
     //history.push(`/products/detail/${id}`);
   };
+  const handleFilter = async () => {
+    try {
+      const res = await axios.get(
+        `https://localhost:44336/api/ShoppingCart/FindProductByKey?name=${key}&fromPrice=${fromPrice}&toPrice=${toPrice}&type=food`
+      );
+      console.log(res.data);
+      setProducts(res.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <>
       <section className="trendy-foods-area pd-tb-120">
@@ -52,6 +52,15 @@ function SearchPage(props) {
           <div className="row">
             <div className="col-lg-12">
               <div className="trendy-foods-filtering">
+                <input
+                  value={fromPrice}
+                  onChange={(e) => setFromPrice(e.target.value)}
+                />
+                <input
+                  value={toPrice}
+                  onChange={(e) => setToPrice(e.target.value)}
+                />
+                <button onClick={() => handleFilter()}>Lọc</button>
                 <div className="row grid">
                   {products?.length &&
                     products.map((product, index) => (
