@@ -12,23 +12,38 @@ function SearchPage(props) {
   //console.log(key);
   const [products, setProducts] = useState([]);
 
+  //   useEffect(() => {
+  //     const getProducts = () => {
+  //       fetch(
+  //         `https://localhost:44336/api/ShoppingCart/FindProductByKey?name=${key}&fromPrice=5000&toPrice=1000000&type=food`
+  //       )
+  //         .then((res) => res.json())
+  //         .then((products) => setProducts(products));
+  //       console.log(key);
+  //       console.log(products);
+  //     };
+  //     getProducts();
+  //   }, []);
   useEffect(() => {
-    const getProducts = () => {
-      fetch(
-        `https://localhost:44336/api/ShoppingCart/FindProductByKey?name=${key}&fromPrice=5000&toPrice=1000000&type=food`
-      )
-        .then((res) => res.json())
-        .then((products) => setProducts(products));
-      console.log(key);
-      console.log(products);
+    const getProducts = async () => {
+      try {
+        const res = await axios.get(
+          `https://localhost:44336/api/ShoppingCart/FindProductByKey?name=${key}&fromPrice=5000&toPrice=1000000&type=food`
+        );
+        console.log(res.data);
+        setProducts(res.data);
+      } catch (error) {
+        console.log(error.message);
+      }
     };
+
     getProducts();
   }, []);
 
   const GetProductDetail = (id) => {
     console.log(id);
-    //localStorage.setItem('product_id', id);
-    history.push(`/products/productdetail/${id}`);
+    localStorage.setItem('product_id', id);
+    //history.push(`/products/detail/${id}`);
   };
   return (
     <>
@@ -56,8 +71,8 @@ function SearchPage(props) {
                               <img src={product.image_link} alt="" />
                               <span className="stc-hover">
                                 <Link
-                                  to=""
-                                  onClick={() => GetProductDetail(product.id)}
+                                  to={`/products/detail/${product.Id}`}
+                                  onClick={() => GetProductDetail(product.Id)}
                                 >
                                   <i className="fa fa-search"></i>
                                 </Link>

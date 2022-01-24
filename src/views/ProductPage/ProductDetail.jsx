@@ -4,11 +4,11 @@ import styles from './ProductDetail.css';
 import axios from 'axios';
 
 function ProductDetail() {
-  const AddtoCart = () => {
+  const AddtoCart = (id) => {
     console.log('call api');
     return axios
       .get(
-        `https://localhost:44336/api/ShoppingCart/InsertShopCart?IdUser=61e2a00631f2514657b67942&IdProduct=61e033acf37afea1e5e2b8d6&quantity=${quantity}`
+        `https://localhost:44336/api/ShoppingCart/InsertShopCart?IdUser=61e2a00631f2514657b67942&IdProduct=${id}&quantity=${quantity}`
       )
       .then((response) => console.log(response));
   };
@@ -18,7 +18,11 @@ function ProductDetail() {
     const fetchProductDetail = async () => {
       try {
         const res = await axios
-          .get(`https://localhost:44336/api/Product/61e03382f37afea1e5e2b8d5`)
+          .get(
+            `https://localhost:44336/api/Product/${localStorage.getItem(
+              'product_id'
+            )}`
+          )
           .then((res) => {
             setProduct(res.data);
             console.log(res.data);
@@ -99,7 +103,7 @@ function ProductDetail() {
                         </button>
 
                         <button
-                          //onClick={AddtoCart}
+                          onClick={() => AddtoCart(product.Id)}
                           class="btn-theme btn btn-success"
                           tabindex="0"
                         >
