@@ -10,9 +10,9 @@ export default function Profile() {
     const [data, setData] = useState({
         name: "test",
         gender: "Nam",
-        date_of_birth: "14/08/2000",
-        email: "asd@gmail.com",
-        phoneNumber: "0935028166",
+        date_of_birth: "2012-3-23",
+        email: "",
+        phoneNumber: "",
     });
     const handleChange = (event) => {
         const name = event.target.name;
@@ -20,10 +20,20 @@ export default function Profile() {
         console.log(`${name} ${value}`);
         setData({ ...data, [name]: value });
       };
-    useEffect(async ()=>{
-        const profile = await fetchUserProfile();
-        console.log(profile);
-    },[]);
+    // useEffect(async ()=>{
+    //     try {
+    //         const profile = await fetchUserProfile();
+    //         setData({...data,
+    //             name: profile.name,
+    //             gender: profile.gender,
+    //             date_of_birth: profile.date_of_birth,
+    //             email: profile.email,
+    //             phoneNumber: profile.phoneNumber})
+    //     console.log(profile);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // },[]);
     return (
         <div className="row body-page">
             <div className="col-sm-4">
