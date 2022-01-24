@@ -1,13 +1,14 @@
-
 import SignUpCustomer from '../views/SignUp/SignUpCustomer';
-import SignUpPage from "../component/SignUp/SignUp";
-import Cart from "../views/Cart/Cart";
-import Checkout from "../views/Checkout/Checkout";
-import NotFoundPage from "../views/Error/NotFoundPage";
-import HomePage from "../views/HomePage";
-import LoginPage from "../views/Login/LoginPage";
-import ChangePass from "../views/ProfileManager/ChangePass";
-import Profile from "../views/ProfileManager/Profile";
+import SignUpPage from '../component/SignUp/SignUp';
+import Cart from '../views/Cart/Cart';
+import Checkout from '../views/Checkout/Checkout';
+import NotFoundPage from '../views/Error/NotFoundPage';
+import HomePage from '../views/HomePage';
+import LoginPage from '../views/Login/LoginPage';
+import ChangePass from '../views/ProfileManager/ChangePass';
+import Profile from '../views/ProfileManager/Profile';
+import SearchPage from '../views/SearchPage/SearchPage';
+import ProductDetail from '../views/ProductPage/ProductDetail';
 
 const routes = [
   {
@@ -26,7 +27,6 @@ const routes = [
     requireLogin: false,
   },
   {
-
     path: '/changepass',
     component: () => <ChangePass />,
     requireLogin: false,
@@ -39,7 +39,7 @@ const routes = [
   {
     path: '/cart',
     component: () => <Cart />,
-    requireLogin: true,
+    requireLogin: false,
   },
   {
     path: '/profile',
@@ -47,9 +47,19 @@ const routes = [
     requireLogin: true,
   },
   {
-    path: "/checkout",
+    path: '/checkout',
     component: () => <Checkout />,
     requireLogin: true,
+  },
+  {
+    path: '/product/search/:key',
+    component: () => <SearchPage />,
+    requireLogin: false,
+  },
+  {
+    path: '/products/detail/:key',
+    component: () => <ProductDetail />,
+    requireLogin: false,
   },
   {
     path: '/',
