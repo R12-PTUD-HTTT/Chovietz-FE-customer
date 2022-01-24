@@ -31,8 +31,7 @@ javaAPI.interceptors.response.use(
 );
 
 const cSharpAPI = axios.create({
-  baseURL:
-    process.env.CSHARP_BE_API || "https://chovietz-be-csharp.herokuapp.com/",
+  baseURL: process.env.CSHARP_BE_API || "https://localhost:44336/api/",
   mode: "cors",
   cache: "no-cache",
   credentials: "same-origin",

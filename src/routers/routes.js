@@ -1,5 +1,6 @@
 import SignUpPage from "../component/SignUp/SignUp";
 import Cart from "../views/Cart/Cart";
+import Checkout from "../views/Checkout/Checkout";
 import NotFoundPage from "../views/Error/NotFoundPage";
 import HomePage from "../views/HomePage";
 import LoginPage from "../views/Login/LoginPage";
@@ -35,6 +36,11 @@ const routes = [
   {
     path: "/profile",
     component: () => <Profile />,
+    requireLogin: true,
+  },
+  {
+    path: "/checkout",
+    component: () => <Checkout />,
     requireLogin: true,
   },
   {
