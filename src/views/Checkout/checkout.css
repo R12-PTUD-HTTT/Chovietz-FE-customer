@@ -1,0 +1,17 @@
+.ml-4r {
+    margin-left: 4rem;;
+}
+
+.shop {
+    font-size: 10px
+}
+
+.space {
+    letter-spacing: 0.8px !important
+}
+.form-check-inline {
+    min-width: 20em;
+}
+.form-check-inline:hover{
+    background-color: beige;
+}
