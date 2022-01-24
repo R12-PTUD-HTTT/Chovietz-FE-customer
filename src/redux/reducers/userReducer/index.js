@@ -24,6 +24,7 @@ export const userReducer = (state = initState, action) => {
         isLogin: !!action.payload?.token,
         token: action.payload?.token || "",
         role: action.payload?.userRole || "",
+        userId: action.payload.userId,
       };
     case actionType.REMOVE_USER_INFORMATION:
       return { ...initState };
