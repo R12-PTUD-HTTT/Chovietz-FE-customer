@@ -27,7 +27,7 @@ function SearchPage(props) {
     };
 
     getProducts();
-  }, []);
+  }, [key]);
 
   const GetProductDetail = (id) => {
     console.log(id);
@@ -52,6 +52,7 @@ function SearchPage(props) {
           <div className="row">
             <div className="col-lg-12">
               <div className="trendy-foods-filtering">
+                <p>Kết quả tìm kiếm cho từ khóa {key}</p>
                 <input
                   value={fromPrice}
                   onChange={(e) => setFromPrice(e.target.value)}
