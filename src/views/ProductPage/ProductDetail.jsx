@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styles from './ProductDetail.css';
+import { Alert } from 'react-bootstrap';
 import axios from 'axios';
 
 function ProductDetail() {
-  const AddtoCart = (id) => {
+  const AddtoCart = async (id) => {
     console.log('call api');
-    return axios
+
+    return await axios
       .get(
         `https://localhost:44336/api/ShoppingCart/InsertShopCart?IdUser=61e2a00631f2514657b67942&IdProduct=${id}&quantity=${quantity}`
       )
       .then((response) => console.log(response));
+    SetIsShow(true);
   };
+
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const [isShow, SetIsShow] = useState(false);
   useEffect(() => {
     const fetchProductDetail = async () => {
       try {
@@ -36,6 +41,12 @@ function ProductDetail() {
   }, []);
   return (
     <>
+      <Alert
+        isShow={isShow}
+        message="Đã thêm sản phẩm vào Giỏ hàng!"
+        onClose={SetIsShow}
+        variant="primary"
+      ></Alert>
       <section id="services" class="services section-bg">
         <div class="container-fluid">
           <div class="row row-sm">
@@ -94,7 +105,7 @@ function ProductDetail() {
                     <span> Cửa hàng: </span>
                     {product.store_name}
                   </div>
-                  <form action="" method="post" accept-charset="utf-8">
+                  <form>
                     <ul class="spe_ul"></ul>
                     <div class="_p-qty-and-cart">
                       <div class="_p-add-cart">
