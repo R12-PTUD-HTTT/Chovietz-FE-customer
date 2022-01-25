@@ -10,6 +10,7 @@ import Profile from '../views/ProfileManager/Profile';
 import SearchPage from '../views/SearchPage/SearchPage';
 import ProductDetail from '../views/ProductPage/ProductDetail';
 import ProductPage from '../views/ProductPage/Product';
+import Rate from '../views/Rate/Rate';
 
 const routes = [
   {
@@ -66,6 +67,11 @@ const routes = [
     path: '/products/detail/:key',
     component: () => <ProductDetail />,
     requireLogin: false,
+  },
+  {
+    path: '/products/rating',
+    component: () => <Rate />,
+    requireLogin: true,
   },
   {
     path: '/',

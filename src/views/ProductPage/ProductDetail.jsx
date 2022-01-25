@@ -62,7 +62,10 @@ function ProductDetail() {
         <div class="container-fluid">
           <div class="row row-sm">
             <div class="col-md-4 _boxzoom">
-              <img src={product.image_link} />
+              <img
+                style={{ float: 'right', height: '100%' }}
+                src={product.image_link}
+              />
             </div>
             <div class="col-md-6">
               <div class="_product-detail-content">

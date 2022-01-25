@@ -48,7 +48,7 @@ function Cart(props) {
   const handleDeleteProduct = async (id) => {
     try {
       const res = await axios.get(
-        `https://localhost:44336/api/ShoppingCart/DeleteShopCart?idUser=${user.user.Id}&IdProduct=${id}`
+        `https://localhost:44336/api/ShoppingCart/DeleteShopCart?idUser=${user.userId}&IdProduct=${id}`
       );
       console.log(res.data);
       const newProducts = productList.filter((product) => product.id !== id);
@@ -130,6 +130,7 @@ function Cart(props) {
                     <hr />
                     <p class="text-center mb-3">
                       <button
+                        style={{ margin: 'auto' }}
                         onClick={() => {
                           let order = productList;
                           console.log(JSON.stringify(order));

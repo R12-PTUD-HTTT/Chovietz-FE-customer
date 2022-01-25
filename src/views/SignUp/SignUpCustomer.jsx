@@ -14,32 +14,39 @@ export default function SignUpCustomer() {
   const [phone, setPhone] = useState('');
   const [birthday, setBirthday] = useState('');
   const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
   const [address, setAddress] = useState('');
+  const [show, setShow] = useState(false);
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const res = await SignUp({
-        username: username,
-        password: password,
-        email: email,
-        cmnd: cmnd,
-        address: address,
-        birthday: birthday,
-        name: name,
-        phoneNumber: phone,
-      });
-      console.log(res);
-      if (res.status === 200) {
-        console.log('SignUp ok');
-        // handleSuccessfulAuth();
+    if (password === rePassword) {
+      event.preventDefault();
+      try {
+        const res = await SignUp({
+          username: username,
+          password: password,
+          email: email,
+          cmnd: cmnd,
+          address: address,
+          birthday: birthday,
+          name: name,
+          phoneNumber: phone,
+        });
+        console.log(res);
+        if (res.status === 200) {
+          console.log('SignUp ok');
+          setShow(true);
+        }
+      } catch (error) {
+        console.log('Failed to sign up', error);
       }
-    } catch (error) {
-      console.log('Failed to sign up', error);
+    } else {
+      console.log('không khớp');
     }
   };
   return (
     <>
+      <Alert show={show} value="Đăng ký thành công"></Alert>
       <main>
         <div className="container">
           <div className="cad card m-5">
@@ -75,10 +82,16 @@ export default function SignUpCustomer() {
                     CMND/CCCD<span className="text-danger"> *</span>
                   </label>
                   <input
+                    // style={{ width: '50%' }}
                     type="text"
                     placeholder="Nhập CMND/CCCD"
                     value={cmnd}
                     onChange={(e) => setCmnd(e.target.value)}
+                  />
+                  <input
+                    style={{ width: '50%', float: 'right' }}
+                    type="file"
+                    placeholder="Tải hình ảnh CMND"
                   />
                 </div>
                 <div className="form-group col-sm-6 flex-column d-flex">
@@ -126,18 +139,23 @@ export default function SignUpCustomer() {
                     type="password"
                     placeholder="Nhập mật khẩu"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="form-group col-sm-6 flex-column d-flex">
                   <label className="form-control-label px-3">
-                    Nhập lại mật khẩu<span className="text-danger"> *</span>
+                    Nhập lại mật khẩu
+                    <span className="text-danger"> *</span>
                   </label>
                   <input
                     type="password"
                     placeholder="Nhập lại mật khẩu"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={rePassword}
+                    onChange={(e) => {
+                      setRePassword(e.target.value);
+                    }}
                   ></input>
                 </div>
               </div>
@@ -177,11 +195,7 @@ export default function SignUpCustomer() {
               </div>
               <div className="row justify-content-between text-center ">
                 <div className="form-group col-12">
-                  <button
-                    onClick={handleSubmit}
-                    type="submit"
-                    className="btn  btn-success"
-                  >
+                  <button onClick={handleSubmit} className="btn  btn-success">
                     <div className="h5">Đăng kí tài khoản</div>
                   </button>
                 </div>
