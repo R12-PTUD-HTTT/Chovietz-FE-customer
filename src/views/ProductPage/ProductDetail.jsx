@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styles from './ProductDetail.css';
 import axios from 'axios';
+import { addProductToCart } from '../../api/product';
 
 function ProductDetail() {
-  const AddtoCart = (id) => {
+  const AddtoCart = async (id) => {
     console.log('call api');
-    return axios
-      .get(
-        `https://localhost:44336/api/ShoppingCart/InsertShopCart?IdUser=61e2a00631f2514657b67942&IdProduct=${id}&quantity=${quantity}`
-      )
-      .then((response) => console.log(response));
+    const res = await addProductToCart(id, quantity);
+    console.log(res);
   };
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
@@ -94,7 +92,7 @@ function ProductDetail() {
                     <span> Cửa hàng: </span>
                     {product.store_name}
                   </div>
-                  <form action="" method="post" accept-charset="utf-8">
+                  <form>
                     <ul class="spe_ul"></ul>
                     <div class="_p-qty-and-cart">
                       <div class="_p-add-cart">
