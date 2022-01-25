@@ -1,15 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import RowItem from './RowItem/RowItem';
-import { Fragment, useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
+import React from "react";
+import ReactDOM from "react-dom";
+import RowItem from "./RowItem/RowItem";
+import { Fragment, useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { selectProductCheckout } from "../../redux/selectors/cartCheckout/productCheckout";
+import { updateProductCheckout } from "../../redux/actions/cartCheckout";
 
 function Cart(props) {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [productList, setProductList] = useState([]);
   const [total, setTotal] = useState(0);
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem("user"));
+  const productCheckout = useSelector(selectProductCheckout);
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -34,6 +39,12 @@ function Cart(props) {
   };
   useEffect(() => {
     productList?.length && calcTotal(productList);
+    const clone = [];
+    productCheckout.forEach((item) => {
+      const existItem = productList.find((i) => i.id === item.id);
+      if (existItem?.id) clone.push(item);
+    });
+    dispatch(updateProductCheckout(clone));
   }, [productList]);
   const handleChangeQuantity = (quantity, idProduct) => {
     let newProductList = productList.map((item) => {
@@ -50,14 +61,29 @@ function Cart(props) {
       const res = await axios.get(
         `https://localhost:44336/api/ShoppingCart/DeleteShopCart?idUser=${user.userId}&IdProduct=${id}`
       );
-      console.log(res.data);
+
       const newProducts = productList.filter((product) => product.id !== id);
       setProductList(newProducts);
     } catch (error) {
       console.log(error.message);
     }
   };
+  const onChangeSelectItem = (product) => {
+    let newListItem = [...productCheckout];
+    const item = productCheckout.find((item) => item.id === product.id);
+    if (!item || !item.id) {
+      newListItem.push(product);
+    } else {
+      newListItem = [];
+      productCheckout.forEach((item) => {
+        if (item.id !== product.id) {
+          newListItem.push(item);
+        }
+      });
+    }
 
+    dispatch(updateProductCheckout(newListItem));
+  };
   return (
     <>
       <main>
@@ -88,6 +114,7 @@ function Cart(props) {
                               handleChangeQuantity(quantity, product.id)
                             }
                             onDeleteProduct={(id) => handleDeleteProduct(id)}
+                            onChangeSelectItem={onChangeSelectItem}
                           />
                         ))}
                     </tbody>
@@ -130,13 +157,13 @@ function Cart(props) {
                     <hr />
                     <p class="text-center mb-3">
                       <button
-                        style={{ margin: 'auto' }}
+                        style={{ margin: "auto" }}
                         onClick={() => {
                           let order = productList;
                           console.log(JSON.stringify(order));
-                          localStorage.setItem('order', JSON.stringify(order));
-                          localStorage.setItem('totalMoney', total);
-                          history.push('/checkout');
+                          localStorage.setItem("order", JSON.stringify(order));
+                          localStorage.setItem("totalMoney", total);
+                          history.push("/checkout");
                         }}
                         class="boxed-btn mb-3 mt-4"
                       >

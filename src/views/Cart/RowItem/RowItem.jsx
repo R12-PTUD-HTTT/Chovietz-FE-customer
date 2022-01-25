@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 function RowItem({
   product,
   onUpdateTotal,
   onChangeQuantity,
   onDeleteProduct,
+  onChangeSelectItem,
 }) {
   const [price, setPrice] = useState(product.price * product.quantity);
   const handleChangeQuantity = (event) => {
@@ -18,14 +19,16 @@ function RowItem({
     //console.log(`Xóa ${id}`);
     onDeleteProduct && onDeleteProduct(id);
   };
-
+  const handleCheckProduct = () => {
+    onChangeSelectItem(product);
+  };
   return (
     <>
       <tr class="align-items-center">
         <td>
           <figure class="itemside align-items-center">
             <div class="aside">
-              <input type="checkbox"></input>
+              <input type="checkbox" onClick={handleCheckProduct}></input>
               <img src={product.imagelink} class="img-sm" alt="" />
             </div>
             <figcaption class="info">
@@ -73,7 +76,7 @@ function RowItem({
         </td>
         <td class="text-right">
           <button
-            style={{ marginTop: '14px' }}
+            style={{ marginTop: "14px" }}
             onClick={() => handleDeleteProduct(product.id)}
             class="btn btn-danger btn-remove"
           >

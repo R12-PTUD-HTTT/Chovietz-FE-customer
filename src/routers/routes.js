@@ -1,86 +1,86 @@
-import SignUpCustomer from '../views/SignUp/SignUpCustomer';
-import SignUpPage from '../component/SignUp/SignUp';
-import Cart from '../views/Cart/Cart';
-import Checkout from '../views/Checkout/Checkout';
-import NotFoundPage from '../views/Error/NotFoundPage';
-import HomePage from '../views/HomePage';
-import LoginPage from '../views/Login/LoginPage';
-import ChangePass from '../views/ProfileManager/ChangePass';
-import Profile from '../views/ProfileManager/Profile';
-import SearchPage from '../views/SearchPage/SearchPage';
-import ProductDetail from '../views/ProductPage/ProductDetail';
-import ProductPage from '../views/ProductPage/Product';
-import Rate from '../views/Rate/Rate';
-import OrderTracking from '../views/OrderTracking/OrderTracking';
+import SignUpCustomer from "../views/SignUp/SignUpCustomer";
+import SignUpPage from "../component/SignUp/SignUp";
+import Cart from "../views/Cart/Cart";
+import Checkout from "../views/Checkout/Checkout";
+import NotFoundPage from "../views/Error/NotFoundPage";
+import HomePage from "../views/HomePage";
+import LoginPage from "../views/Login/LoginPage";
+import ChangePass from "../views/ProfileManager/ChangePass";
+import Profile from "../views/ProfileManager/Profile";
+import SearchPage from "../views/SearchPage/SearchPage";
+import ProductDetail from "../views/ProductPage/ProductDetail";
+import ProductPage from "../views/ProductPage/Product";
+import Rate from "../views/Rate/Rate";
+import OrderTracking from "../views/OrderTracking/OrderTracking";
 
 const routes = [
   {
-    path: '/',
+    path: "/",
     component: () => <HomePage />,
     requireLogin: false,
   },
   {
-    path: '/signup',
+    path: "/signup",
     component: () => <SignUpPage />,
     requireLogin: false,
   },
   {
-    path: '/signup-customer',
+    path: "/signup-customer",
     component: () => <SignUpCustomer />,
     requireLogin: false,
   },
   {
-    path: '/changepass',
+    path: "/changepass",
     component: () => <ChangePass />,
     requireLogin: true,
   },
   {
-    path: '/login',
+    path: "/login",
     component: () => <LoginPage />,
     requireLogin: false,
   },
   {
-    path: '/cart',
+    path: "/cart",
     component: () => <Cart />,
     requireLogin: true,
   },
   {
-    path: '/profile',
+    path: "/profile",
     component: () => <Profile />,
     requireLogin: true,
   },
   {
-    path: '/checkout',
+    path: "/checkout",
     component: () => <Checkout />,
     requireLogin: true,
   },
   {
-    path: '/tracking',
+    path: "/tracking",
     component: () => <OrderTracking />,
     requireLogin: true,
   },
   {
-    path: '/products',
+    path: "/products",
     component: () => <ProductPage />,
     requireLogin: false,
   },
   {
-    path: '/product/search/:key',
+    path: "/product/search/:key",
     component: () => <SearchPage />,
     requireLogin: false,
   },
   {
-    path: '/products/detail/:key',
+    path: "/products/detail/:key",
     component: () => <ProductDetail />,
     requireLogin: false,
   },
   {
-    path: '/products/rating',
+    path: "/products/rating",
     component: () => <Rate />,
     requireLogin: true,
   },
   {
-    path: '/',
+    path: "/",
     component: () => <NotFoundPage />,
     requireLogin: false,
     exact: false,

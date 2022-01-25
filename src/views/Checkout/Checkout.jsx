@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./checkout.css";
 import { Link } from "react-router-dom";
 import { selectUserId } from "../../redux/selectors/userSelector";
@@ -8,6 +7,11 @@ import { getUserInfor } from "../../api/user";
 import { submitOrder } from "../../api/order";
 import { TYPE_NEW_ORDER, WAIT_CONFIRM } from "../../constants/orderConstants";
 import ChangeReceiverInfor from "../../component/customer/ChangeReceiverInfor";
+import { selectProductCheckout } from "../../redux/selectors/cartCheckout/productCheckout";
+import axios from "axios";
+import { updateProductCheckout } from "../../redux/actions/cartCheckout";
+import NotifyModel from "../../component/model/NotifyModel";
+import { useHistory } from "react-router-dom";
 
 const orderTemp = {
   customer: {
@@ -76,7 +80,13 @@ const orderTemp = {
 
 export default function Checkout() {
   const userId = useSelector(selectUserId);
+  const history = useHistory();
   const [order, setOrder] = useState({});
+  const productCheckout = useSelector(selectProductCheckout);
+  const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [isShow, setIsShow] = useState(false);
+  const dispatch = useDispatch();
   const defaultDeliveryCost = 10000;
   useEffect(() => {
     async function fetchUserDetail() {
@@ -84,6 +94,7 @@ export default function Checkout() {
         const { data, status } = await getUserInfor(userId);
         if (status === 200) {
           setOrder({
+            ...order,
             customer: {
               id: data.id,
               username: data.username,
@@ -93,7 +104,6 @@ export default function Checkout() {
             },
             receiver: data.receiver_infor,
             total_price: orderTemp.total_price,
-            cart: orderTemp.cart,
             payment_type: "COD",
           });
         }
@@ -101,11 +111,62 @@ export default function Checkout() {
     }
     userId && fetchUserDetail();
   }, [userId]);
+
+  useEffect(() => {
+    if (productCheckout.length <= 0) return;
+    const customeCart = [];
+    let _total = 0;
+    productCheckout.forEach((product) => {
+      let flag = false;
+      _total += product.saleprice * product.quantity;
+      if (customeCart.length > 0) {
+        for (let index = 0; index < customeCart.length; index++) {
+          const element = customeCart[index];
+
+          if (product.store_id === element.shop.id) {
+            customeCart[index].product.push({
+              ...product,
+              sale_price: product.saleprice,
+              image_link: product.imagelink,
+            });
+            customeCart[index].total_price +=
+              product.saleprice * product.quantity;
+            flag = true;
+            break;
+          }
+        }
+      }
+
+      if (!flag) {
+        customeCart.push({
+          shop: {
+            id: product.store_id,
+            store_name: product.store_name,
+            phone_number: product.store_phone_number,
+          },
+          total_price: product.saleprice * product.quantity,
+          product: [
+            {
+              ...product,
+              sale_price: product.saleprice,
+              image_link: product.imagelink,
+            },
+          ],
+        });
+      }
+    });
+    setCart(customeCart);
+    setTotal(_total);
+    console.log("customeCart", customeCart);
+  }, [productCheckout]);
   const handleChangeReceiver = () => {};
-  const handleSubmitOrder = () => {
+  const handleRedirect = () => {
+    history.push("/cart");
+  };
+  const handleSubmitOrder = async () => {
     const successOrder = [];
     try {
-      order.cart.map(async (smallItem, index) => {
+      cart.map(async (smallItem, index) => {
         let smallOrder = {
           customer: order.customer,
           receiver: order.receiver,
@@ -115,8 +176,9 @@ export default function Checkout() {
           shipper: null,
           status: WAIT_CONFIRM.value,
           typeOrder: TYPE_NEW_ORDER,
+          payment_type: "COD",
         };
-        console.log(JSON.stringify(smallOrder));
+        // console.log(JSON.stringify(smallOrder));
         const { status } = await submitOrder(smallOrder);
         if (status === 200) {
           successOrder.push(index);
@@ -127,12 +189,31 @@ export default function Checkout() {
     } catch (error) {
       console.log(error);
     }
+    try {
+      productCheckout.forEach(async (item) => {
+        const res = await axios.get(
+          `https://localhost:44336/api/ShoppingCart/DeleteShopCart?idUser=${userId}&IdProduct=${item.id}`
+        );
+      });
+      dispatch(updateProductCheckout([]));
+      setIsShow(true);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   return (
     <div className="container my-5 ">
-      <div className="">
+      {/* <div className="">
         <ChangeReceiverInfor />
-      </div>
+      </div> */}
+      {isShow && (
+        <div>
+          <NotifyModel
+            message="Đơn hàng đã được tạo"
+            onClickClose={handleRedirect}
+          />
+        </div>
+      )}
       <div className="row justify-content-center ">
         <div className="col-xl-12">
           <div className="card shadow-lg ">
@@ -176,7 +257,6 @@ export default function Checkout() {
                 <div className="card border-0">
                   <div className="card-header pb-0">
                     <p className="card-text mt-4 space">
-
                       THÔNG TIN GIAO HÀNG{" "}
                       <Link
                         className=" small ml-3 text-primary"
@@ -262,55 +342,58 @@ export default function Checkout() {
                     <p className="card-text mt-4 space">ĐƠN CỦA BẠN</p>
                   </div>
                   <div className="card-body pt-0">
-                    {order.cart?.map((smallOrder, index) => (
-                      <div key={index}>
-                        <h5>
-                          <b>{smallOrder.shop.store_name}</b>
-                        </h5>
-                        {smallOrder.product.map((productItem, index) => (
-                          <div key={index}>
-                            <div className="row justify-content-between">
-                              <div className="col-auto col-md-7">
-                                <div className="media flex-column flex-sm-row">
-                                  <img
-                                    className=" img-fluid"
-                                    src={productItem.image_link}
-                                    width="62"
-                                    height="62"
-                                    alt=""
-                                  />
-                                  <div className="media-body my-auto">
-                                    <div className="row ">
-                                      <div className="col-auto">
-                                        <p className="mb-0">
-                                          <b>{productItem.name}</b>
-                                        </p>
-                                        <small className="text-muted">
-                                          SL: {productItem.sale_price}
-                                        </small>
+                    {cart.length > 0 &&
+                      cart?.map((smallOrder, index) => (
+                        <div key={index}>
+                          <h5>
+                            <b>{smallOrder.shop?.store_name}</b>
+                          </h5>
+                          {smallOrder.product?.map((productItem, index) => (
+                            <div key={index}>
+                              <div className="row justify-content-between">
+                                <div className="col-auto col-md-7">
+                                  <div className="media flex-column flex-sm-row">
+                                    <img
+                                      className=" img-fluid"
+                                      src={productItem.image_link}
+                                      width="62"
+                                      height="62"
+                                      alt=""
+                                    />
+                                    <div className="media-body my-auto">
+                                      <div className="row ">
+                                        <div className="col-auto">
+                                          <p className="mb-0">
+                                            <b>{productItem.name}</b>
+                                          </p>
+                                          <small className="text-muted">
+                                            SL: {productItem.sale_price}
+                                          </small>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
+                                <div className=" pl-0 flex-sm-col col-auto my-auto">
+                                  <p className="boxed-1">
+                                    {productItem.quantity}
+                                  </p>
+                                </div>
+                                <div className=" pl-0 flex-sm-col col-md-3 my-auto text-right">
+                                  <p>
+                                    <b>
+                                      {productItem.sale_price *
+                                        productItem.quantity}{" "}
+                                    </b>
+                                    VND
+                                  </p>
+                                </div>
                               </div>
-                              <div className=" pl-0 flex-sm-col col-auto my-auto">
-                                <p className="boxed-1">2</p>
-                              </div>
-                              <div className=" pl-0 flex-sm-col col-md-3 my-auto text-right">
-                                <p>
-                                  <b>
-                                    {productItem.sale_price *
-                                      productItem.quantity}{" "}
-                                  </b>
-                                  VND
-                                </p>
-                              </div>
+                              <hr className="my-2" />
                             </div>
-                            <hr className="my-2" />
-                          </div>
-                        ))}
-                      </div>
-                    ))}
+                          ))}
+                        </div>
+                      ))}
                     <div className="row ">
                       <div className="col">
                         <div className="row justify-content-between">
@@ -321,8 +404,7 @@ export default function Checkout() {
                           </div>
                           <div className="flex-sm-col col-auto">
                             <p className="mb-1">
-
-                              <b>{order.total_price}</b> VND
+                              <b>{total}</b> VND
                             </p>
                           </div>
                         </div>
@@ -346,9 +428,8 @@ export default function Checkout() {
                           </div>
                           <div className="flex-sm-col col-auto">
                             <p className="mb-1">
-
                               <b style={{ color: "red" }}>
-                                {defaultDeliveryCost + order.total_price}{" "}
+                                {defaultDeliveryCost + total}{" "}
                               </b>
                               VND
                             </p>
