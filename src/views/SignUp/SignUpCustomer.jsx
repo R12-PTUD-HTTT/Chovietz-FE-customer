@@ -33,13 +33,13 @@ export default function SignUpCustomer() {
         });
         console.log(res);
         if (res.status === 200) {
-          console.log('SignUp ok');
+          alert('Đăng ký thành công');
         }
       } catch (error) {
         console.log('Failed to sign up', error);
       }
     } else {
-      console.log('không khớp');
+      alert('Mật khẩu không khớp');
     }
   };
 
