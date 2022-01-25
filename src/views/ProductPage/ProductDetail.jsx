@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import './ProductDetail.module.css';
+import style from './ProductDetail.css';
 import { Alert } from 'react-bootstrap';
 import axios from 'axios';
 
