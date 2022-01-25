@@ -1,6 +1,6 @@
 import { useState, React } from 'react';
 import { Link } from 'react-router-dom';
-import style from './SignUp.module.css';
+import './SignUp.module.css';
 import axios from 'axios';
 import { Alert } from 'react-bootstrap';
 import { useAlert } from 'react-alert';
@@ -16,7 +16,6 @@ export default function SignUpCustomer() {
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
   const [address, setAddress] = useState('');
-  const [show, setShow] = useState(false);
 
   const handleSubmit = async (event) => {
     if (password === rePassword) {
@@ -35,7 +34,6 @@ export default function SignUpCustomer() {
         console.log(res);
         if (res.status === 200) {
           console.log('SignUp ok');
-          setShow(true);
         }
       } catch (error) {
         console.log('Failed to sign up', error);
@@ -44,14 +42,14 @@ export default function SignUpCustomer() {
       console.log('không khớp');
     }
   };
+
   return (
     <>
-      <Alert show={show} value="Đăng ký thành công"></Alert>
       <main>
         <div className="container">
           <div className="cad card m-5">
             <h3 className="text-center mb-4">Đăng ký Mua hàng</h3>
-            <form className="form-card">
+            <div className="form-card">
               <div className="row justify-content-between text-left">
                 <div className="form-group col-sm-6 flex-column d-flex">
                   <label className="form-control-label px-3">
@@ -200,7 +198,7 @@ export default function SignUpCustomer() {
                   </button>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </main>
