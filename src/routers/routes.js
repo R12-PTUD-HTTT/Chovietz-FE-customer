@@ -11,6 +11,7 @@ import SearchPage from '../views/SearchPage/SearchPage';
 import ProductDetail from '../views/ProductPage/ProductDetail';
 import ProductPage from '../views/ProductPage/Product';
 import Rate from '../views/Rate/Rate';
+import OrderTracking from '../views/OrderTracking/OrderTracking';
 
 const routes = [
   {
@@ -31,7 +32,7 @@ const routes = [
   {
     path: '/changepass',
     component: () => <ChangePass />,
-    requireLogin: false,
+    requireLogin: true,
   },
   {
     path: '/login',
@@ -51,6 +52,11 @@ const routes = [
   {
     path: '/checkout',
     component: () => <Checkout />,
+    requireLogin: true,
+  },
+  {
+    path: '/tracking',
+    component: () => <OrderTracking />,
     requireLogin: true,
   },
   {

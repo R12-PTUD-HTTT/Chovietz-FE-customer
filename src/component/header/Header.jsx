@@ -96,9 +96,10 @@ function Header(props) {
                   </div>
 
                   <div className="header-acc-list  header-cart">
-                    <Link to="/signup-customer" style={{ marginRight: '5px' }}>
+                    {isLogin ? <></> : <Link to="/signup-customer" style={{ marginRight: '5px' }}>
                       <Button variant="light">Đăng Kí </Button>
-                    </Link>
+                    </Link>}
+                    
                     {/* <Link to="/login">
                       <Button variant="success">Đăng Nhập </Button>
                     </Link> */}
