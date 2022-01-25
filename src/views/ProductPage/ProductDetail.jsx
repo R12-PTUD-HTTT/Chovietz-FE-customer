@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import './ProductDetail.module.css';
+import style from './ProductDetail.css';
 import { Alert } from 'react-bootstrap';
 import axios from 'axios';
 
@@ -119,7 +119,7 @@ function ProductDetail() {
                     <span> Cửa hàng: </span>
                     {product.store_name}
                   </div>
-                  <form>
+                  <div>
                     <ul class="spe_ul"></ul>
                     <div class="_p-qty-and-cart">
                       <div class="_p-add-cart">
@@ -145,7 +145,7 @@ function ProductDetail() {
                         <input type="hidden" name="url" value="" />
                       </div>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
