@@ -1,11 +1,12 @@
 import { cSharpAPI } from './config';
 
+const user = JSON.parse(localStorage.getItem('user'));
 //just test api
 export async function getCustomer() {
   return await cSharpAPI.get('api/customer');
 }
 export async function addProductToCart(id, quantity) {
   return await cSharpAPI.get(
-    `/ShoppingCart/InsertShopCartIdUser=61e2a00631f2514657b67942&IdProduct=${id}&quantity=${quantity}`
+    `/ShoppingCart/InsertShopCartIdUser=${user.userId}&IdProduct=${id}&quantity=${quantity}`
   );
 }

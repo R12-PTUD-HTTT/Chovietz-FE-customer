@@ -6,13 +6,15 @@ import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 function Cart(props) {
+  const history = useHistory();
   const [productList, setProductList] = useState([]);
   const [total, setTotal] = useState(0);
+  const user = JSON.parse(localStorage.getItem('user'));
   useEffect(() => {
     const getProducts = async () => {
       try {
         const res = await axios.get(
-          'https://localhost:44336/api/ShoppingCart/GetDataShoppingCartById/61e2a00631f2514657b67942'
+          `https://localhost:44336/api/ShoppingCart/GetDataShoppingCartById/${user.userId}`
         );
         console.log(res.data.lstCartView);
         setProductList(res.data.lstCartView);
@@ -46,7 +48,7 @@ function Cart(props) {
   const handleDeleteProduct = async (id) => {
     try {
       const res = await axios.get(
-        `https://localhost:44336/api/ShoppingCart/DeleteShopCart?idUser=61e2a00631f2514657b67942&IdProduct=${id}`
+        `https://localhost:44336/api/ShoppingCart/DeleteShopCart?idUser=${user.user.Id}&IdProduct=${id}`
       );
       console.log(res.data);
       const newProducts = productList.filter((product) => product.id !== id);
@@ -130,9 +132,10 @@ function Cart(props) {
                       <button
                         onClick={() => {
                           let order = productList;
-                          order.total = total;
                           console.log(JSON.stringify(order));
                           localStorage.setItem('order', JSON.stringify(order));
+                          localStorage.setItem('totalMoney', total);
+                          history.push('/checkout');
                         }}
                         class="boxed-btn mb-3 mt-4"
                       >

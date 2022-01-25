@@ -1,16 +1,16 @@
-import React from "react";
-import style from "./styleLogin.module.css";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { fetchUserLogin } from "../../redux/actions/userAction";
+import React from 'react';
+import style from './styleLogin.module.css';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { fetchUserLogin } from '../../redux/actions/userAction';
 
 function LoginPage(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [data, setData] = useState({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
 
   const handleChange = (event) => {
@@ -27,7 +27,7 @@ function LoginPage(props) {
       fetchUserLogin(
         data,
         ({ userRole }) => {
-          history.push("/");
+          history.push('/');
         },
         (message) => {
           alert(message);
@@ -41,7 +41,7 @@ function LoginPage(props) {
       <div className="card shadow p-5 mb-5">
         <img src="img/icon/account_circle.svg" alt="" />
         <form
-          className={`${style["login-form"]} container`}
+          className={`${style['login-form']} container`}
           onSubmit={handleSubmitLogin}
         >
           <label className="row" htmlFor="username">

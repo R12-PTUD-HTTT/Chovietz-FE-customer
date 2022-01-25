@@ -40,7 +40,7 @@ const routes = [
   {
     path: '/cart',
     component: () => <Cart />,
-    requireLogin: false,
+    requireLogin: true,
   },
   {
     path: '/profile',
