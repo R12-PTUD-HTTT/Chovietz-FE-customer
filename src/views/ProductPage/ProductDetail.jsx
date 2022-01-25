@@ -7,16 +7,15 @@ import axios from 'axios';
 function ProductDetail() {
   const user = JSON.parse(localStorage.getItem('user'));
   const history = useHistory();
-  console.log(user.userId);
+  //console.log(user.userId);
   const AddtoCart = async (id) => {
     console.log('call api');
-
+    alert('Đã thêm sản phẩm vào giỏ');
     return await axios
       .get(
         `https://localhost:44336/api/ShoppingCart/InsertShopCart?IdUser=${user.userId}&IdProduct=${id}&quantity=${quantity}`
       )
       .then((response) => console.log(response));
-    SetIsShow(true);
   };
   const handleBuyNow = (product) => {
     product.quantity = quantity;
@@ -29,7 +28,6 @@ function ProductDetail() {
 
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
-  const [isShow, SetIsShow] = useState(false);
   useEffect(() => {
     const fetchProductDetail = async () => {
       try {
@@ -52,12 +50,6 @@ function ProductDetail() {
   }, []);
   return (
     <>
-      <Alert
-        isShow={isShow}
-        message="Đã thêm sản phẩm vào Giỏ hàng!"
-        onClose={SetIsShow}
-        variant="primary"
-      ></Alert>
       <section id="services" class="services section-bg">
         <div class="container-fluid">
           <div class="row row-sm">
