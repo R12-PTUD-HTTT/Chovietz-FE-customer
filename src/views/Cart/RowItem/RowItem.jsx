@@ -61,18 +61,19 @@ function RowItem({
         </td>
         <td>
           <div class="price-wrap">
-            <var class="price">{product.price}</var>
+            <var class="price">{product.price} đ</var>
           </div>
           {/* price-wrap .// */}
         </td>
         <td>
           <div class="price-wrap">
-            <var class="price">{product.price * product.quantity}</var>
+            <var class="price">{product.price * product.quantity} đ</var>
           </div>
           {/* price-wrap .// */}
         </td>
         <td class="text-right">
           <button
+            style={{ marginTop: '14px' }}
             onClick={() => handleDeleteProduct(product.id)}
             class="btn btn-danger btn-remove"
           >

@@ -1,19 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import styles from './ProductDetail.css';
+import './ProductDetail.module.css';
 import { Alert } from 'react-bootstrap';
 import axios from 'axios';
 
 function ProductDetail() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const history = useHistory();
+  console.log(user.userId);
   const AddtoCart = async (id) => {
     console.log('call api');
 
     return await axios
       .get(
-        `https://localhost:44336/api/ShoppingCart/InsertShopCart?IdUser=61e2a00631f2514657b67942&IdProduct=${id}&quantity=${quantity}`
+        `https://localhost:44336/api/ShoppingCart/InsertShopCart?IdUser=${user.userId}&IdProduct=${id}&quantity=${quantity}`
       )
       .then((response) => console.log(response));
     SetIsShow(true);
+  };
+  const handleBuyNow = (product) => {
+    product.quantity = quantity;
+    product.totalMoney = product.price * quantity;
+    localStorage.setItem('product', JSON.stringify(product));
+    localStorage.setItem('totalMoney', product.totalMoney);
+
+    history.push('/checkout');
   };
 
   const [product, setProduct] = useState({});
@@ -51,7 +62,10 @@ function ProductDetail() {
         <div class="container-fluid">
           <div class="row row-sm">
             <div class="col-md-4 _boxzoom">
-              <img src={product.image_link} />
+              <img
+                style={{ float: 'right', height: '100%' }}
+                src={product.image_link}
+              />
             </div>
             <div class="col-md-6">
               <div class="_product-detail-content">
@@ -109,7 +123,13 @@ function ProductDetail() {
                     <ul class="spe_ul"></ul>
                     <div class="_p-qty-and-cart">
                       <div class="_p-add-cart">
-                        <button class="btn-theme btn buy-btn" tabindex="0">
+                        <button
+                          onClick={() => {
+                            handleBuyNow(product);
+                          }}
+                          class="btn-theme btn buy-btn"
+                          tabindex="0"
+                        >
                           <i class="fa fa-shopping-cart"></i> Mua ngay
                         </button>
 
