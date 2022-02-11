@@ -1,33 +1,63 @@
-import "./Cart.css";
-import React from "react";
-import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import RowItem from './RowItem/RowItem';
+import { Fragment, useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
-import RowItem from "./RowItem/RowItem";
-
-const productList = [
-  {
-    name: "Lecture",
-    weight: 2,
-    price: 1.2,
-  },
-  {
-    name: "Lecture",
-    weight: 2,
-    price: 1.2,
-  },
-  {
-    name: "Lecture",
-    weight: 2,
-    price: 1.2,
-  },
-  {
-    name: "Lecture",
-    weight: 2,
-    price: 1.2,
-  },
-];
 function Cart(props) {
+  const history = useHistory();
+  const [productList, setProductList] = useState([]);
+  const [total, setTotal] = useState(0);
+  const user = JSON.parse(localStorage.getItem('user'));
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await axios.get(
+          `https://localhost:44336/api/ShoppingCart/GetDataShoppingCartById/${user.userId}`
+        );
+        console.log(res.data.lstCartView);
+        setProductList(res.data.lstCartView);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    getProducts();
+  }, []);
+  const calcTotal = (products) => {
+    let total_money = 0;
+    products.map((product) => {
+      total_money = total_money + product.price * product.quantity;
+    });
+    setTotal(total_money);
+  };
+  useEffect(() => {
+    productList?.length && calcTotal(productList);
+  }, [productList]);
+  const handleChangeQuantity = (quantity, idProduct) => {
+    let newProductList = productList.map((item) => {
+      if (item.id === idProduct) {
+        item.quantity = quantity;
+      }
+      return item;
+    });
+    setProductList(newProductList);
+  };
+
+  const handleDeleteProduct = async (id) => {
+    try {
+      const res = await axios.get(
+        `https://localhost:44336/api/ShoppingCart/DeleteShopCart?idUser=${user.userId}&IdProduct=${id}`
+      );
+      console.log(res.data);
+      const newProducts = productList.filter((product) => product.id !== id);
+      setProductList(newProducts);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <>
       <main>
@@ -40,17 +70,25 @@ function Cart(props) {
                     <thead class="text-muted mb-3">
                       <tr class="small text-uppercase">
                         <th scope="col" class="sm-w">
-                          Product
+                          Sản phẩm
                         </th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price</th>
+                        <th scope="col">Số Lượng</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Tổng</th>
+
                         <th scope="col" class="text-right"></th>
                       </tr>
                     </thead>
                     <tbody>
                       {productList?.length > 0 &&
                         productList?.map((product) => (
-                          <RowItem product={product} />
+                          <RowItem
+                            product={product}
+                            onChangeQuantity={(quantity) =>
+                              handleChangeQuantity(quantity, product.id)
+                            }
+                            onDeleteProduct={(id) => handleDeleteProduct(id)}
+                          />
                         ))}
                     </tbody>
                   </table>
@@ -63,16 +101,16 @@ function Cart(props) {
                   <div class="card-body">
                     <form>
                       <div class="form-group">
-                        <label>Have coupon?</label>
+                        <label>Nhập Mã Giảm giá?</label>
                         <div class="input-group">
                           <input
                             type="text"
                             class="form-control"
                             name=""
-                            placeholder="Coupon code"
+                            placeholder="Mã giảm giá"
                           />
                           <span class="input-group-append">
-                            <button class="btn btn-primary">Apply</button>
+                            <button class="btn btn-primary">Áp dụng</button>
                           </span>
                         </div>
                       </div>
@@ -84,30 +122,26 @@ function Cart(props) {
                 <div class="card payment-card">
                   <div class="card-body">
                     <dl class="dlist-align">
-                      <dt>Total price:</dt>
-                      <dd class="text-right text-dark">USD 568</dd>
-                    </dl>
-                    <dl class="dlist-align">
-                      <dt>Discount:</dt>
-                      <dd class="text-right text-danger">USD 658</dd>
-                    </dl>
-                    <dl class="dlist-align">
-                      <dt>Total:</dt>
+                      <dt>Tổng:</dt>
                       <dd class="text-right  h5 text-success">
-                        <strong>$1,650</strong>
+                        <strong>{total}đ</strong>
                       </dd>
                     </dl>
                     <hr />
                     <p class="text-center mb-3">
-                      <Link to="">
-                        <img src="img/payments.png" height="26" />
-                      </Link>
-                      <Link to="" class="boxed-btn mb-3 mt-4">
-                        Make Purchase
-                      </Link>
-                      <Link to="" class="boxed-btn btn-outline">
-                        Make Purchase
-                      </Link>
+                      <button
+                        style={{ margin: 'auto' }}
+                        onClick={() => {
+                          let order = productList;
+                          console.log(JSON.stringify(order));
+                          localStorage.setItem('order', JSON.stringify(order));
+                          localStorage.setItem('totalMoney', total);
+                          history.push('/checkout');
+                        }}
+                        class="boxed-btn mb-3 mt-4"
+                      >
+                        Đặt hàng
+                      </button>
                     </p>
                   </div>
                   {/* card-body.// */}

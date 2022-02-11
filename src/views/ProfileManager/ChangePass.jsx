@@ -1,8 +1,48 @@
 import React from 'react';
 import './styleProfile.css';
 import Subnav from '../../component/Subnav/Subnav';
+import { useState } from 'react';
+import { changePassword } from "../../api/user";
+import CustomAlert from '../../component/Alert/CustomAlert';
+
 
 export default function ChangePass() {
+    const [mess, setMess] = useState("");
+    const [isAlert, setIsAlert] = useState(false);
+    const [variant, setVariant] = useState("success");
+    const [data, setData] = useState({
+        current: "",
+        newpass: "",
+        comfirm: "",
+    });
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setData({ ...data, [name]: value });
+    };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const result = await changePassword(data);
+            if(result.status === 200){
+                setMess("Thay đổi mật khẩu thành công");
+                setIsAlert(true);
+            }
+            else {
+                setMess(result.data.message);
+                setIsAlert(true);
+            }
+            setData({
+                current: "",
+                newpass: "",
+                comfirm: "",
+            })
+        } catch (error) {
+            setMess(error);
+            setVariant("danger");
+            setIsAlert(true);
+        }
+    }
     return (
         <div className="row body-page">
             <div className="col-sm-4">
@@ -16,7 +56,7 @@ export default function ChangePass() {
                     </div>
                     <div className="profile-body">
                         <div className="profile-body-content">
-                            <form>
+                            <form method='put' onSubmit={handleSubmit}>
                                 <div className="body-content">
                                     <div className="content-name">
                                         <label>Mật Khẩu Hiện Tại</label>
@@ -24,7 +64,7 @@ export default function ChangePass() {
                                     <div className="content-value">
                                         <div className="input-with-validator-wrapper">
                                             <div className="input-with-validator">
-                                                <input type="password" className="form-control" maxLength="255" />
+                                                <input type="password" className="form-control" maxLength="255" name='current' value={data.current} onChange={handleChange}/>
                                             </div>
                                         </div>
                                     </div>
@@ -36,7 +76,7 @@ export default function ChangePass() {
                                     <div className="content-value">
                                         <div className="input-with-validator-wrapper">
                                             <div className="input-with-validator">
-                                                <input type="password" className="form-control" maxLength="255" />
+                                                <input type="password" className="form-control" maxLength="255" name='newpass' value={data.newpass} onChange={handleChange}/>
                                             </div>
                                         </div>
                                     </div>
@@ -48,7 +88,7 @@ export default function ChangePass() {
                                     <div className="content-value">
                                         <div className="input-with-validator-wrapper">
                                             <div className="input-with-validator">
-                                                <input type="password" className="form-control" maxLength="255" />
+                                                <input type="password" className="form-control" maxLength="255" name='comfirm' value={data.comfirm} onChange={handleChange}/>
                                             </div>
                                         </div>
                                     </div>
@@ -58,6 +98,11 @@ export default function ChangePass() {
                                 </div>
                             </form>
                         </div>
+                        <CustomAlert
+                        message={mess}
+                        isShow={isAlert}
+                        onClose={setIsAlert}
+                        variant={variant}/>
                     </div>
                 </div>
             </div>

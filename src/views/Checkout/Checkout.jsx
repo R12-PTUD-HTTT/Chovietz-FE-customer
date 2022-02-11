@@ -1,9 +1,138 @@
-import React from 'react';
-import './checkout.css';
-import { Link } from 'react-router-dom';
+
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import "./checkout.css";
+import { Link } from "react-router-dom";
+import { selectUserId } from "../../redux/selectors/userSelector";
+import { getUserInfor } from "../../api/user";
+import { submitOrder } from "../../api/order";
+import { TYPE_NEW_ORDER, WAIT_CONFIRM } from "../../constants/orderConstants";
+import ChangeReceiverInfor from "../../component/customer/ChangeReceiverInfor";
+
+const orderTemp = {
+  customer: {
+    id: 1,
+    name: "John",
+  },
+  receiver: {
+    name: "Nguyen Van A",
+    phone_number: "0439243534",
+    city: "TP Hồ Chí Minh",
+    district: "Thủ Đức",
+    ward: "Linh Trung",
+    street: "60 đường Hoàng Diệu",
+  },
+  total_price: 150000,
+  cart: [
+    {
+      shop: {
+        id: "61cf2d142d94273c7a180efb",
+        store_name: "FPT Shop",
+        phone_number: "0364872648",
+      },
+      total_price: 100000,
+      product: [
+        {
+          _id: "61e03382f37afea1e5e2b8d5",
+          name: "Xoài",
+          price: 12000,
+          sale_price: 10000,
+          image_link:
+            "https://freshfruitvietnam.vn/upload/images/2020/03/331x331-1585646976-single_product1-Xoai2.jpg",
+          quantity: 5,
+        },
+        {
+          _id: "61e03382f37afea1e5e2b8d5",
+          name: "Xoài",
+          price: 12000,
+          sale_price: 10000,
+          image_link:
+            "https://freshfruitvietnam.vn/upload/images/2020/03/331x331-1585646976-single_product1-Xoai2.jpg",
+          quantity: 5,
+        },
+      ],
+    },
+    {
+      shop: {
+        id: "61cf2d142d94273c7a180efb",
+        store_name: "FPT Shop",
+        phone_number: "0364872648",
+      },
+      total_price: 50000,
+      product: [
+        {
+          _id: "61e03382f37afea1e5e2b8d5",
+          name: "Xoài",
+          price: 12000,
+          sale_price: 10000,
+          image_link:
+            "https://freshfruitvietnam.vn/upload/images/2020/03/331x331-1585646976-single_product1-Xoai2.jpg",
+          quantity: 5,
+        },
+      ],
+    },
+  ],
+};
+
 export default function Checkout() {
+  const userId = useSelector(selectUserId);
+  const [order, setOrder] = useState({});
+  const defaultDeliveryCost = 10000;
+  useEffect(() => {
+    async function fetchUserDetail() {
+      try {
+        const { data, status } = await getUserInfor(userId);
+        if (status === 200) {
+          setOrder({
+            customer: {
+              id: data.id,
+              username: data.username,
+              name: data.name,
+              email: data.email,
+              receiver: data.receiver,
+            },
+            receiver: data.receiver_infor,
+            total_price: orderTemp.total_price,
+            cart: orderTemp.cart,
+            payment_type: "COD",
+          });
+        }
+      } catch {}
+    }
+    userId && fetchUserDetail();
+  }, [userId]);
+  const handleChangeReceiver = () => {};
+  const handleSubmitOrder = () => {
+    const successOrder = [];
+    try {
+      order.cart.map(async (smallItem, index) => {
+        let smallOrder = {
+          customer: order.customer,
+          receiver: order.receiver,
+          total_price: smallItem.total_price,
+          shop: smallItem.shop,
+          product: smallItem.product,
+          shipper: null,
+          status: WAIT_CONFIRM.value,
+          typeOrder: TYPE_NEW_ORDER,
+        };
+        console.log(JSON.stringify(smallOrder));
+        const { status } = await submitOrder(smallOrder);
+        if (status === 200) {
+          successOrder.push(index);
+        } else {
+          return;
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="container my-5 ">
+      <div className="">
+        <ChangeReceiverInfor />
+      </div>
       <div className="row justify-content-center ">
         <div className="col-xl-12">
           <div className="card shadow-lg ">
@@ -47,30 +176,39 @@ export default function Checkout() {
                 <div className="card border-0">
                   <div className="card-header pb-0">
                     <p className="card-text mt-4 space">
-                      THÔNG TIN GIAO HÀNG{' '}
-                      <Link className=" small ml-3 text-primary">
-                        {' '}
+
+                      THÔNG TIN GIAO HÀNG{" "}
+                      <Link
+                        className=" small ml-3 text-primary"
+                        to="#"
+                        onClick={handleChangeReceiver}
+                      >
                         Chỉnh sửa
                       </Link>
                     </p>
                   </div>
-                  <div className="card-body">
-                    <div className="row justify-content-between">
-                      <div className="col-auto mt-0">
-                        <p className="mb-1">
-                          <b>Người nhận hàng: Võ Ngọc Đức</b>
-                        </p>
-                        <p className="mb-1">
-                          <b>SDT: 0123478955</b>
-                        </p>
-                        <p className="mb-1">
-                          <b>
-                            Địa chỉ: 123/11 Nguyễn Biểu, Quận 5, TP Hồ Chí Minh
-                          </b>{' '}
-                        </p>
+
+                  {!!order.receiver && (
+                    <div className="card-body">
+                      <div className="row justify-content-between">
+                        <div className="col-auto mt-0">
+                          <p className="mb-1">
+                            <b>Người nhận hàng: {order.receiver.name}</b>
+                          </p>
+                          <p className="mb-1">
+                            <b>SDT: {order.receiver.phone_number}</b>
+                          </p>
+                          <p className="mb-1">
+                            <b>
+                              Địa chỉ: {order.receiver.street},{" "}
+                              {order.receiver.ward},{order.receiver.district},{" "}
+                              {order.receiver.city}
+                            </b>{" "}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
                 <div className="card border-0">
                   <div className="card-header pb-0">
@@ -91,7 +229,7 @@ export default function Checkout() {
                           />
                           <label
                             className="form-check-label ml-3"
-                            for="inlineRadio1"
+                            htmlFor="inlineRadio1"
                           >
                             <b>Thanh toán khi nhận hàng</b>
                           </label>
@@ -108,7 +246,7 @@ export default function Checkout() {
                           />
                           <label
                             className="form-check-label ml-3"
-                            for="inlineRadio2"
+                            htmlFor="inlineRadio2"
                           >
                             <b>Thẻ ngân hàng</b>
                           </label>
@@ -121,115 +259,58 @@ export default function Checkout() {
               <div className="col-md-5">
                 <div className="card border-0 ">
                   <div className="card-header pb-0">
-                    <p className="card-text mt-4 space">
-                      ĐƠN CỦA BẠN{' '}
-                      <Link className=" small ml-3 text-primary">
-                        {' '}
-                        Chỉnh sửa
-                      </Link>{' '}
-                    </p>
+                    <p className="card-text mt-4 space">ĐƠN CỦA BẠN</p>
                   </div>
                   <div className="card-body pt-0">
-                    <div className="row justify-content-between">
-                      <div className="col-auto col-md-7">
-                        <div className="media flex-column flex-sm-row">
-                          {' '}
-                          <img
-                            className=" img-fluid"
-                            src="https://i.imgur.com/6oHix28.jpg"
-                            width="62"
-                            height="62"
-                          />
-                          <div className="media-body my-auto">
-                            <div className="row ">
-                              <div className="col-auto">
-                                <p className="mb-0">
-                                  <b>Tên sản phẩm</b>
+                    {order.cart?.map((smallOrder, index) => (
+                      <div key={index}>
+                        <h5>
+                          <b>{smallOrder.shop.store_name}</b>
+                        </h5>
+                        {smallOrder.product.map((productItem, index) => (
+                          <div key={index}>
+                            <div className="row justify-content-between">
+                              <div className="col-auto col-md-7">
+                                <div className="media flex-column flex-sm-row">
+                                  <img
+                                    className=" img-fluid"
+                                    src={productItem.image_link}
+                                    width="62"
+                                    height="62"
+                                    alt=""
+                                  />
+                                  <div className="media-body my-auto">
+                                    <div className="row ">
+                                      <div className="col-auto">
+                                        <p className="mb-0">
+                                          <b>{productItem.name}</b>
+                                        </p>
+                                        <small className="text-muted">
+                                          SL: {productItem.sale_price}
+                                        </small>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className=" pl-0 flex-sm-col col-auto my-auto">
+                                <p className="boxed-1">2</p>
+                              </div>
+                              <div className=" pl-0 flex-sm-col col-md-3 my-auto text-right">
+                                <p>
+                                  <b>
+                                    {productItem.sale_price *
+                                      productItem.quantity}{" "}
+                                  </b>
+                                  VND
                                 </p>
-                                <small className="text-muted">descripton</small>
                               </div>
                             </div>
+                            <hr className="my-2" />
                           </div>
-                        </div>
+                        ))}
                       </div>
-                      <div className=" pl-0 flex-sm-col col-auto my-auto">
-                        <p className="boxed-1">2</p>
-                      </div>
-                      <div className=" pl-0 flex-sm-col col-md-3 my-auto text-right">
-                        <p>
-                          <b>123000 VND</b>
-                        </p>
-                      </div>
-                    </div>
-                    <hr className="my-2" />
-                    <div className="row justify-content-between">
-                      <div className="col-auto col-md-7">
-                        <div className="media flex-column flex-sm-row">
-                          {' '}
-                          <img
-                            className=" img-fluid "
-                            src="https://i.imgur.com/9MHvALb.jpg"
-                            width="62"
-                            height="62"
-                          />
-                          <div className="media-body my-auto">
-                            <div className="row ">
-                              <div className="col">
-                                <p className="mb-0">
-                                  <b>EC-GO Bag Standard</b>
-                                </p>
-                                <small className="text-muted">
-                                  2 Week Subscription
-                                </small>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="pl-0 flex-sm-col col-auto my-auto">
-                        <p className="boxed">3</p>
-                      </div>
-                      <div className="pl-0 flex-sm-col col-md-3 my-auto text-right">
-                        <p>
-                          <b>179000 VND</b>
-                        </p>
-                      </div>
-                    </div>
-                    <hr className="my-2" />
-                    <div className="row justify-content-between">
-                      <div className="col-auto col-md-7">
-                        <div className="media flex-column flex-sm-row">
-                          {' '}
-                          <img
-                            className=" img-fluid "
-                            src="https://i.imgur.com/6oHix28.jpg"
-                            width="62"
-                            height="62"
-                          />
-                          <div className="media-body my-auto">
-                            <div className="row ">
-                              <div className="col">
-                                <p className="mb-0">
-                                  <b>EC-GO Bag Standard</b>
-                                </p>
-                                <small className="text-muted">
-                                  2 Week Subscription
-                                </small>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="pl-0 flex-sm-col col-auto my-auto">
-                        <p className="boxed-1">2</p>
-                      </div>
-                      <div className="pl-0 flex-sm-col col-md-3 my-auto text-right">
-                        <p>
-                          <b>1234500 VND</b>
-                        </p>
-                      </div>
-                    </div>
-                    <hr className="my-2" />
+                    ))}
                     <div className="row ">
                       <div className="col">
                         <div className="row justify-content-between">
@@ -240,7 +321,8 @@ export default function Checkout() {
                           </div>
                           <div className="flex-sm-col col-auto">
                             <p className="mb-1">
-                              <b>179 VND</b>
+
+                              <b>{order.total_price}</b> VND
                             </p>
                           </div>
                         </div>
@@ -252,7 +334,7 @@ export default function Checkout() {
                           </div>
                           <div className="flex-sm-col col-auto">
                             <p className="mb-1">
-                              <b>0 VND</b>
+                              <b>{defaultDeliveryCost}</b> VND
                             </p>
                           </div>
                         </div>
@@ -264,7 +346,11 @@ export default function Checkout() {
                           </div>
                           <div className="flex-sm-col col-auto">
                             <p className="mb-1">
-                              <b>537 VND</b>
+
+                              <b style={{ color: "red" }}>
+                                {defaultDeliveryCost + order.total_price}{" "}
+                              </b>
+                              VND
                             </p>
                           </div>
                         </div>
@@ -276,6 +362,7 @@ export default function Checkout() {
                         <button
                           type="button"
                           className="btn btn-block btn-outline-primary btn-lg"
+                          onClick={handleSubmitOrder}
                         >
                           Đặt đơn
                         </button>

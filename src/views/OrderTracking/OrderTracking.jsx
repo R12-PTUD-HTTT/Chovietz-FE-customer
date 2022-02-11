@@ -1,13 +1,40 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import {getOrderDetail} from "../../api/order"
 import './ordertracking.css'
+import CustomAlert from '../../component/Alert/CustomAlert';
 
 export default function OrderTracking() {
+
+    const orderId = "61ee05b6ef78e66f48ef3787";
+    const [order, setOrder] = useState({});
+    const [mess, setMess] = useState("");
+    const [isAlert, setIsAlert] = useState(false);
+    const [variant, setVariant] = useState("success");
+    useEffect(async() => {
+        try {
+            const result = await getOrderDetail();
+            const order = result.data;
+            setOrder({
+                ...order,
+            })
+        } catch (error) {
+            console.log(error);
+            setMess(error);
+            setIsAlert(true);
+        }
+    },[]);
     return (
+        <>
+        <CustomAlert
+        message={mess}
+        isShow={isAlert}
+        onClose={setIsAlert}
+        variant={variant}/>
         <div class="container py-5">
             <article class="card shadow-lg">
                 <header class="card-header"> My Orders / Tracking </header>
                 <div class="card-body">
-                    <h6>Order ID: OD45345345435</h6>
+                    <h6>Order ID: {orderId}</h6>
                     <article class="card">
                         <div class="card-body row">
                             <div class="col"> <strong>Thời gian nhận hàng ước tính:</strong> <br />1/1/2022 7:00AM </div>
@@ -27,5 +54,6 @@ export default function OrderTracking() {
                 </div>
             </article>
         </div>
+        </>
     )
 }
